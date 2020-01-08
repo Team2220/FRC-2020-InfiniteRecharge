@@ -1,57 +1,53 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.drivetrain.XboxDrive;
+import frc.robot.subsystems.TwilightHorse;
 
-/**
- * This class is where the bulk of the robot should be declared.  Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
- * (including subsystems, commands, and button mappings) should be declared here.
- */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  // Singleton instance
+  private static RobotContainer instance;
 
+  // Drivetrain subsystem
+  private TwilightHorse drivetrain;
 
+  // Singleton constructor
+  private RobotContainer() {
+    /*
+     * Checks that this class is not initialized until the robot is on, or else
+     * subsystems and commands cannot be properly initialized. The following if
+     * throws a runtime exception if the instance exists before the robot is turned
+     * on.
+     */
+    if (!Robot.isReal()) {
+      throw new RuntimeException("The 'setBinds' method has been called before the robot was started!");
+    }
 
-  /**
-   * The container for the robot.  Contains subsystems, OI devices, and commands.
-   */
-  public RobotContainer() {
-    // Configure the button bindings
-    configureButtonBindings();
+    // Initialize drivetrain subsystem
+    drivetrain = TwilightHorse.getInstance();
+
+    // Must happen last in constructor
+    setBinds();
   }
 
   /**
-   * Use this method to define your button->command mappings.  Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
-   * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   * Singleton class instance accessor.
+   * 
+   * @return Returns the singleton object for the Robot Container class.
    */
-  private void configureButtonBindings() {
+  public static RobotContainer getInstance() {
+    if (instance == null) {
+      instance = new RobotContainer();
+    }
+    return instance;
   }
 
-
   /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
+   * Nest all control binds inside this method. Takes place of 2019's OI class.
    */
-  public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+  private void setBinds() {
+    // Set up drivetrain default command
+    XboxDrive xboxDrive = new XboxDrive(drivetrain);
+    drivetrain.setDefaultCommand(xboxDrive);
   }
 }
