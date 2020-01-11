@@ -1,6 +1,8 @@
 package frc.robot.commands.drivetrain;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.TwilightHorse;
 
 /**
@@ -16,9 +18,9 @@ public class XboxDrive extends CommandBase {
 
     @Override
     public void execute() {
-        // double power = RobotContainer.getDriverController().getY(Hand.kLeft);
-        // double spin = RobotContainer.getDriverController().getX(Hand.kRight);
-        // drivetrain.drive(power, spin);
+        double power = RobotContainer.getDriverController().getY(Hand.kLeft);
+        double spin = RobotContainer.getDriverController().getX(Hand.kRight);
+        drivetrain.drive(power, spin);
     }
 
 }

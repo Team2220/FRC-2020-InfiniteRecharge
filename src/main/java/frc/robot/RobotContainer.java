@@ -2,6 +2,7 @@ package frc.robot;
 
 import frc.robot.commands.drivetrain.XboxDrive;
 import frc.robot.subsystems.TwilightHorse;
+import frc.robot.util.XboxWrapper;
 
 public class RobotContainer {
 
@@ -10,6 +11,10 @@ public class RobotContainer {
 
   // Drivetrain subsystem
   private TwilightHorse drivetrain;
+
+  // Driver controllers
+  private final XboxWrapper driverController = new XboxWrapper(0);
+  private final XboxWrapper armManagement = new XboxWrapper(1);
 
   // Singleton constructor
   private RobotContainer() {
@@ -20,7 +25,7 @@ public class RobotContainer {
      * on.
      */
     if (!Robot.isReal()) {
-      throw new RuntimeException("The 'setBinds' method has been called before the robot was started!");
+      throw new RuntimeException("Error: Attempting to initialize robot code before the robot is on");
     }
 
     // Initialize drivetrain subsystem
@@ -40,6 +45,14 @@ public class RobotContainer {
       instance = new RobotContainer();
     }
     return instance;
+  }
+
+  public static XboxWrapper getDriverController() {
+    return getInstance().driverController;
+  }
+
+  public static XboxWrapper getManipulatorController() {
+    return getInstance().armManagement;
   }
 
   /**
