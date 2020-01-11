@@ -38,6 +38,11 @@ public class TwilightHorse extends SubsystemBase {
         rightLeader = neoBuilder(CANMap.RIGHT_LEADER);
         rightFollower = neoBuilder(CANMap.RIGHT_FOLLOWER);
 
+        leftLeader.restoreFactoryDefaults();
+        leftFollower.restoreFactoryDefaults();
+        rightLeader.restoreFactoryDefaults();
+        rightFollower.restoreFactoryDefaults();
+
         // Initialize the drive motor encoders
         leftEncoder = leftLeader.getEncoder();
         rightEncoder = rightLeader.getEncoder();
@@ -58,6 +63,22 @@ public class TwilightHorse extends SubsystemBase {
             instance = new TwilightHorse();
         }
         return instance;
+    }
+
+    public double getLeftEncoderPosition() {
+        return leftEncoder.getPosition();
+    }
+
+    public double getRightEncoderPosition() {
+        return rightEncoder.getPosition();
+    }
+
+    public double getLeftEncoderVelocity() {
+        return leftEncoder.getVelocity();
+    }
+
+    public double getRightEncoderVelocity() {
+        return rightEncoder.getVelocity();
     }
 
     public void drive(double power, double spin) {
