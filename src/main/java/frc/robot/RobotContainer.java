@@ -1,9 +1,15 @@
 package frc.robot;
 
-import frc.robot.commands.drivetrain.XboxDrive;
 import frc.robot.subsystems.TwilightHorse;
-import frc.robot.util.XboxWrapper;
+import frc.robot.util.xbox.XboxController;
 
+/**
+ * Robot Container is a singleton class where all the subsystems are
+ * centralized. This class also handles controller binding; a replacement for
+ * OI.
+ * 
+ * @author 2220
+ */
 public class RobotContainer {
 
   // Singleton instance
@@ -13,12 +19,12 @@ public class RobotContainer {
   private TwilightHorse drivetrain;
 
   // Driver controllers
-  private final XboxWrapper driverController = new XboxWrapper(0);
-  private final XboxWrapper armManagement = new XboxWrapper(1);
+  private final XboxController driverController = new XboxController(0);
+  private final XboxController armManagement = new XboxController(1);
 
   // Singleton constructor
   private RobotContainer() {
-    /*
+    /**
      * Checks that this class is not initialized until the robot is on, or else
      * subsystems and commands cannot be properly initialized. The following if
      * throws a runtime exception if the instance exists before the robot is turned
@@ -36,9 +42,9 @@ public class RobotContainer {
   }
 
   /**
-   * Singleton class instance accessor.
+   * Singleton instance getter method.
    * 
-   * @return Returns the singleton object for the Robot Container class.
+   * @return Returns the singleton object for the Robot Container.
    */
   public static RobotContainer getInstance() {
     if (instance == null) {
@@ -47,20 +53,28 @@ public class RobotContainer {
     return instance;
   }
 
-  public static XboxWrapper getDriverController() {
+  /**
+   * Getter for the driver controller.
+   * 
+   * @return The driver controller.
+   */
+  public static XboxController getDriverController() {
     return getInstance().driverController;
   }
 
-  public static XboxWrapper getManipulatorController() {
+  /**
+   * Getter for the manipulator controller. "Arm management."
+   * 
+   * @return The manipulator controller.
+   */
+  public static XboxController getManipulatorController() {
     return getInstance().armManagement;
   }
 
   /**
-   * Nest all control binds inside this method. Takes place of 2019's OI class.
+   * Nest all control binds inside this method. Takes place of previous year's OI
+   * class.
    */
   private void setBinds() {
-    // Set up drivetrain default command
-    XboxDrive xboxDrive = new XboxDrive(drivetrain);
-    drivetrain.setDefaultCommand(xboxDrive);
   }
 }

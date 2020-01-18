@@ -1,27 +1,23 @@
-package frc.robot.util;
+package frc.robot.util.xbox;
 
 import java.util.HashMap;
 
-import edu.wpi.first.wpilibj.Notifier;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 /**
  * A wrapper class for the standard Xbox controller class that increases ease of
- * access.
+ * access. Classifies as a subsystem.
  * 
  * @author Reece
  */
-public class XboxWrapper {
+public class XboxController extends SubsystemBase {
 
     // Xbox controller object
-    private final XboxController xb;
-
-    // Notifier to stop controller rumbling
-    private final Notifier stopRumble = new Notifier(() -> rumble(0));
+    private final edu.wpi.first.wpilibj.XboxController xb;
 
     // Joystick deadzone variable
     private HashMap<Hand, Double> joystickDeadzones = new HashMap<>();
@@ -34,19 +30,10 @@ public class XboxWrapper {
      * 
      * @param port The port of Xbox controller on the driver station.
      */
-    public XboxWrapper(int port) {
-        xb = new XboxController(port);
+    public XboxController(int port) {
+        xb = new edu.wpi.first.wpilibj.XboxController(port);
         joystickDeadzones.put(Hand.kLeft, 0.05);
         joystickDeadzones.put(Hand.kRight, 0.05);
-    }
-
-    /**
-     * Returns the unwrapped Xbox controller object.
-     * 
-     * @return The unwrapped Xbox controller object.
-     */
-    public XboxController getControllerObject() {
-        return xb;
     }
 
     /**
@@ -157,14 +144,9 @@ public class XboxWrapper {
         return oldDeadzone;
     }
 
-    private void rumble(double intensity) {
+    public void rumble(double intensity) {
         xb.setRumble(RumbleType.kLeftRumble, intensity);
         xb.setRumble(RumbleType.kRightRumble, intensity);
-    }
-
-    public void rumbleFor(double millis, double intensity) {
-        rumble(intensity);
-        stopRumble.startSingle(millis * 1000);
     }
 
     /**

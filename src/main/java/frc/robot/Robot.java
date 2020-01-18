@@ -3,8 +3,16 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
+/**
+ * Main robot class. Most things are handled by the Robot Container class, but
+ * command schedulers and autonomous command schedulers go in the respective
+ * methods.
+ * 
+ * @author 2220
+ */
 public class Robot extends TimedRobot {
 
+  // Robot Container instance variable
   private RobotContainer robot;
 
   @Override
