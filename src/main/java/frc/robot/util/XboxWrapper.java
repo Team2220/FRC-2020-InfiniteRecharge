@@ -1,5 +1,7 @@
 package frc.robot.util;
 
+import java.util.HashMap;
+
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -22,7 +24,7 @@ public class XboxWrapper {
     private final Notifier stopRumble = new Notifier(() -> rumble(0));
 
     // Joystick deadzone variable
-    private double joystickDeadzone = 0.05;
+    private HashMap<Hand, Double> joystickDeadzones = new HashMap<>();
 
     // Trigger deadzone variable
     private double triggerDeadzone = 0.2;
@@ -34,6 +36,8 @@ public class XboxWrapper {
      */
     public XboxWrapper(int port) {
         xb = new XboxController(port);
+        joystickDeadzones.put(Hand.kLeft, 0.05);
+        joystickDeadzones.put(Hand.kRight, 0.05);
     }
 
     /**
@@ -76,8 +80,9 @@ public class XboxWrapper {
      * @return Returns the X axis value from the specified side.
      */
     public double getX(Hand hand) {
+        double deadzone = joystickDeadzones.get(hand);
         double x = xb.getX(hand);
-        return Math.abs(x) > joystickDeadzone ? x : 0;
+        return Math.abs(x) > deadzone ? x : 0;
     }
 
     /**
@@ -87,8 +92,9 @@ public class XboxWrapper {
      * @return Returns the Y axis value from the specified side.
      */
     public double getY(Hand hand) {
+        double deadzone = joystickDeadzones.get(hand);
         double y = xb.getY(hand);
-        return Math.abs(y) > joystickDeadzone ? y : 0;
+        return Math.abs(y) > deadzone ? y : 0;
     }
 
     /**
@@ -103,20 +109,33 @@ public class XboxWrapper {
     }
 
     /**
+     * Gets the deadzone value of joystick on the specified hand side.
+     * 
+     * @param hand Which hand side.
+     * @return Returns the joystick deadzone value on the specified side.
+     */
+    public double getDeadzone(Hand hand) {
+        return joystickDeadzones.get(hand);
+    }
+
+    /**
      * Sets the deadzone for the joysticks, or the minimum counted input.
      * 
+     * @param hand     Which hand side to set the deadzone of.
      * @param deadzone The new deadzone for the joysticks.
      * @return The old deadzone.
      */
-    public double setJoystickDeadzone(double deadzone) {
-        double oldDeadzone = joystickDeadzone;
+    public double setJoystickDeadzone(Hand hand, double deadzone) {
+        double oldDeadzone = joystickDeadzones.get(hand);
+        double newDeadzone;
         if (deadzone < 0) {
-            joystickDeadzone = 0;
+            newDeadzone = 0;
         } else if (deadzone > 1) {
-            joystickDeadzone = 1;
+            newDeadzone = 1;
         } else {
-            joystickDeadzone = deadzone;
+            newDeadzone = deadzone;
         }
+        joystickDeadzones.put(hand, newDeadzone);
         return oldDeadzone;
     }
 
