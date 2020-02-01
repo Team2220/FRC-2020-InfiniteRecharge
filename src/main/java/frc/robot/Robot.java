@@ -7,7 +7,13 @@
 
 package frc.robot;
 
+import com.revrobotics.ColorMatch;
+import com.revrobotics.ColorMatchResult;
+import com.revrobotics.ColorSensorV3;
+
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -21,6 +27,33 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+
+  private final I2C.Port i2cPort = I2C.Port.kOnboard;
+
+  /**
+   * A Rev Color Sensor V3 object is constructed with an I2C port as a 
+   * parameter. The device will be automatically initialized with default 
+   * parameters.
+   */
+  private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+
+  /**
+   * A Rev Color Match object is used to register and detect known colors. This can 
+   * be calibrated ahead of time or during operation.
+   * 
+   * This object uses a simple euclidian distance to estimate the closest match
+   * with given confidence range.
+   */
+  private final ColorMatch m_colorMatcher = new ColorMatch();
+
+  /**
+   * Note: Any example colors should be calibrated as the user needs, these
+   * are here as a basic example.
+   */
+  private final Color kBlueTarget = ColorMatch.makeColor(0.121826171875, 0.4296875, 0.448486328125);
+  private final Color kGreenTarget = ColorMatch.makeColor(0.163818359375, 0.58251953125, 0.253662109375);
+  private final Color kRedTarget = ColorMatch.makeColor(0.5283203125, 0.341796875, 0.1298828125);
+  private final Color kYellowTarget = ColorMatch.makeColor(0.5283203125, 0.341796875, 0.1298828125);
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -96,6 +129,53 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    Color detectedColor = m_colorSensor.getColor();
+
+    /**
+     * Run the color match algorithm on our detected color
+     */
+    String colorString;
+
+    double minDiff = colorDifference(detectedColor, kBlueTarget);
+    String closestColor = "Blue";
+    if (colorDifference(detectedColor, kRedTarget) < minDiff) {
+      minDiff = colorDifference(detectedColor, kRedTarget);
+      closestColor = "Red";
+    }
+    if (colorDifference(detectedColor, kGreenTarget) < minDiff) {
+      minDiff = colorDifference(detectedColor, kGreenTarget);
+      closestColor = "Green";
+    }
+    if (colorDifference(detectedColor, kYellowTarget) < minDiff) {
+      minDiff = colorDifference(detectedColor, kYellowTarget);
+      closestColor = "Yellow";
+    }
+
+    // ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
+
+    // if (match.color == kBlueTarget) {
+    //   colorString = "Blue";
+    // } else if (match.color == kRedTarget) {
+    //   colorString = "Red";
+    // } else if (match.color == kGreenTarget) {
+    //   colorString = "Green";
+    // } else if (match.color == kYellowTarget) {
+    //   colorString = "Yellow";
+    // } else {
+    //   colorString = "Unknown";
+    // }
+
+    //System.out.println(colorString);
+    System.out.println("The color is " + closestColor);
+    //double red = detectedColor.red;
+    //double blue = detectedColor.blue;
+    //double green = detectedColor.green;
+
+    //System.out.println(red + ", " + green + ", " + blue);
+  }
+
+  double colorDifference(Color color1, Color color2) {
+    return ((color1.red-color2.red)*(color1.red-color2.red)) + ((color1.green-color2.green)*(color1.green-color2.green)) + ((color1.blue-color2.blue)*(color1.blue-color2.blue));
   }
 
   @Override
