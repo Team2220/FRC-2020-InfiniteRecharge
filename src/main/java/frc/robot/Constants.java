@@ -16,4 +16,10 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    public final class Intake {
+        public static final int TALON = 25; 
+        public static final int SOLENOID_FORWARD = 14;
+        public static final int SOLENOID_REVERSE = 25;
+    }
 }
+
