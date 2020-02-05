@@ -21,5 +21,9 @@ public final class Constants {
         public static final int SOLENOID_FORWARD = 14;
         public static final int SOLENOID_REVERSE = 25;
     }
+
+    public final class Transfer {
+        public static final int TALON = 65;
+    }
 }
 

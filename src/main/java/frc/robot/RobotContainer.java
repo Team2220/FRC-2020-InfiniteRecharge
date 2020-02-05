@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Transfer;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -17,6 +18,9 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Intake intake = new Intake();
+
+  private final Transfer transfer = new Transfer();
+
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
 
