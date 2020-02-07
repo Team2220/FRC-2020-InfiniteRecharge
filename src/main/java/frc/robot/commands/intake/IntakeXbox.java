@@ -13,16 +13,16 @@ import frc.robot.subsystems.Intake;
 public class IntakeXbox extends CommandBase {
 
     private final Intake intake;
-    private final XboxController xb;
 
     public IntakeXbox(Intake intake) {
-        xb = RobotContainer.getManipulatorController();
+        
         this.intake = intake;
         addRequirements(intake);
     }
     
     @Override
     public void execute() {
+        XboxController xb = RobotContainer.getManipulatorController();
         double intakePower = xb.getY(Hand.kRight);
         intake.setSpeed(intakePower);
     }

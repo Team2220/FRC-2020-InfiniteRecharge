@@ -12,8 +12,8 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 public final class Constants {
     public final class Intake {
         public static final int TALON = 25; 
-        public static final int SOLENOID_FORWARD = 14;
-        public static final int SOLENOID_REVERSE = 25;
+        public static final int SOLENOID_FORWARD = 2;
+        public static final int SOLENOID_REVERSE = 1;
     }
     /**
      * Constants related to the drivetrain.
