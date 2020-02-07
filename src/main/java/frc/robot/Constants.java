@@ -21,10 +21,10 @@ public final class Constants {
     public static final class DrivetrainConstants {
 
         // Drive motor controller CAN ids TODO need to be actually mapped
-        public static final int LEFT_LEADER = 1;
-        public static final int LEFT_FOLLOWER = 2;
-        public static final int RIGHT_LEADER = 3;
-        public static final int RIGHT_FOLLOWER = 4;
+        public static final int LEFT_LEADER = 4;
+        public static final int LEFT_FOLLOWER = 1;
+        public static final int RIGHT_LEADER = 2;
+        public static final int RIGHT_FOLLOWER = 3;
 
         // Drivetrain idle behavior while driving
         public static final IdleMode idleBehavior = IdleMode.kBrake; // TODO see if brake or coast is better for driving
