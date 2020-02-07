@@ -1,7 +1,7 @@
 package frc.robot;
 
 import com.revrobotics.CANSparkMax.IdleMode;
-
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 /**
  * Centralized location for all constants. Following new WPI convention of
  * making inner static classes for each subsystem. CAN IDs should go inside
@@ -40,6 +40,15 @@ public final class Constants {
     }
     public final class Transfer {
         public static final int TALON = 65;
+    }
+    public static final class ShooterConstants {
+
+        public static final int LEFT_FALCON = 1;
+        public static final int RIGHT_FALCON = 2;
+
+        public static final double RAMP_RATE = 1.5;
+
+        public static final NeutralMode IDLE_BEHAVIOR = NeutralMode.Coast;
     }
 }
 
