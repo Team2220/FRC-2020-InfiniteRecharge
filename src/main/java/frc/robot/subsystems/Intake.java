@@ -7,9 +7,10 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.commands.intake.IntakeXbox;
 
 /** 
-* @author vish O_O: strong supporter of R22_D20
+* @author vish: strong supporter of R22_D20
 */
 
 public class Intake extends SubsystemBase {
@@ -23,11 +24,13 @@ private TalonSRX talon = new TalonSRX(Constants.Intake.TALON);
 private DoubleSolenoid solenoid = new DoubleSolenoid(Constants.Intake.SOLENOID_FORWARD, Constants.Intake.SOLENOID_REVERSE);
   public Intake() {
 
+    setDefaultCommand(new IntakeXbox(this));
+
   }
 
   @Override
   public void periodic() {
-    
+
   }
 
 public void setSpeed(double demand) {
