@@ -3,8 +3,12 @@ package frc.robot.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.Rev2mDistanceSensor;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.Rev2mDistanceSensor.Port;
+import com.revrobotics.Rev2mDistanceSensor.RangeProfile;
+import com.revrobotics.Rev2mDistanceSensor.Unit;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
@@ -27,6 +31,9 @@ public class TwilightHorse extends SubsystemBase {
     // navX gyro
     private AHRS navX;
 
+    // Distance sensor
+    private Rev2mDistanceSensor distanceSensor;
+
     // Drive motor encoders
     private CANEncoder leftEncoder, rightEncoder;
 
@@ -48,6 +55,10 @@ public class TwilightHorse extends SubsystemBase {
 
         // Initialize navX
         navX = new AHRS();
+
+        //Initialize distance sensor
+        distanceSensor = new Rev2mDistanceSensor(Port.kOnboard, Unit.kInches, RangeProfile.kDefault);
+        distanceSensor.setAutomaticMode(true);
 
         // Initialize drivetrain odometer
         odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(navX.getAngle()));
@@ -103,6 +114,16 @@ public class TwilightHorse extends SubsystemBase {
             instance = new TwilightHorse();
         }
         return instance;
+    }
+
+    /**
+     * Uses distance sensor to find distance in inches.
+     * 
+     * @return The distance measured by the distance sensor. 
+     * If distance not valid, returns -1.
+     */
+    public double getRange() {
+        return distanceSensor.getRange();
     }
 
     /**
