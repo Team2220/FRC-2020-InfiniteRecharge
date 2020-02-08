@@ -6,6 +6,8 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Transfer;
 import frc.robot.subsystems.TwilightHorse;
 import frc.robot.util.xbox.XboxController;
+import frc.robot.util.xbox.XboxController.Button;
+import frc.robot.commands.transfer.TransferWithButton;
 
 /**
  * Robot Container is a singleton class where all the subsystems are
@@ -87,5 +89,6 @@ public class RobotContainer {
    * class.
    */
   private void setBinds() {
+    armManagement.getButton(Button.A).whileHeld(new TransferWithButton(transfer));
   }
 }
