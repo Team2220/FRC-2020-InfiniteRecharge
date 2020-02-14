@@ -15,7 +15,7 @@ import frc.robot.commands.intake.IntakeXbox;
 
 public class Intake extends SubsystemBase {
 
-public enum DeployState {
+public enum Position {
   RETRACTED,
   EXTENDED
 }
@@ -37,7 +37,7 @@ public void setSpeed(double demand) {
   talon.set(ControlMode.PercentOutput, demand);
 }
 
-public void setPosition(DeployState deploy) {
+public void setPosition(Position deploy) {
   switch (deploy) {
     case EXTENDED: 
     solenoid.set(Value.kForward);

@@ -4,10 +4,10 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.TwilightHorse;
-import frc.robot.subsystems.Intake.DeployState;
+import frc.robot.subsystems.Intake.Position;
 import frc.robot.util.xbox.XboxController;
 import frc.robot.util.xbox.XboxController.Button;
-import frc.robot.commands.intake.IntakeSetDeployState;
+import frc.robot.commands.intake.IntakeSetPosition;
 import frc.robot.commands.hopper.HopperWithButton;
 
 /**
@@ -91,7 +91,7 @@ public class RobotContainer {
    */
   private void setBinds() {
     armManagement.getButton(Button.A).whileHeld(new HopperWithButton(hopper));
-    armManagement.getButton(Button.RIGHT_BUMPER).whenPressed(new IntakeSetDeployState( DeployState.EXTENDED, intake));
-    armManagement.getButton(Button.LEFT_BUMPER).whenPressed(new IntakeSetDeployState( DeployState.RETRACTED, intake));
+    armManagement.getButton(Button.RIGHT_BUMPER).whenPressed(new IntakeSetPosition( Position.EXTENDED, intake));
+    armManagement.getButton(Button.LEFT_BUMPER).whenPressed(new IntakeSetPosition( Position.RETRACTED, intake));
   }
 }
