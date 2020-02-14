@@ -1,6 +1,7 @@
 package frc.robot;
 
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.TwilightHorse;
@@ -22,6 +23,7 @@ public class RobotContainer {
   private final Intake intake = new Intake();
   private final Shooter shooter;
   private final Hopper hopper = new Hopper();
+  private final Climber climber = new Climber();
 
 
   // Singleton instance

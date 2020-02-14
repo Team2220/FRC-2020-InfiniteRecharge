@@ -57,5 +57,11 @@ public final class Constants {
 
         public static final NeutralMode IDLE_BEHAVIOR = NeutralMode.Coast;
     }
+    public final class ClimberConstants {
+
+        public static final int RIGHT_FALCON = 6;
+        public static final int LEFT_FALCON = 7;
+
+    }
 }
 
