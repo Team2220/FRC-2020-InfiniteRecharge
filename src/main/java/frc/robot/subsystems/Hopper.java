@@ -7,8 +7,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Hopper extends SubsystemBase {
-  private TalonSRX talon = new TalonSRX(Constants.Hopper.TALON);
-  
+  private TalonSRX leftTalon = new TalonSRX(Constants.Hopper.LEFT_TALON);
+  private TalonSRX rightTalon = new TalonSRX(Constants.Hopper.RIGHT_TALON);
+
+
   public Hopper() {
     
   }
@@ -19,6 +21,7 @@ public class Hopper extends SubsystemBase {
   }
 
   public void set(double demand) {
-      talon.set(ControlMode.PercentOutput, demand);
+      leftTalon.set(ControlMode.PercentOutput, demand);
+      rightTalon.set(ControlMode.PercentOutput, demand);
   }
 }
