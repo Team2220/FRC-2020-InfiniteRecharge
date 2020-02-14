@@ -15,7 +15,7 @@ import frc.robot.commands.intake.IntakeXbox;
 
 public class Intake extends SubsystemBase {
 
-enum DeployState {
+public enum DeployState {
   RETRACTED,
   EXTENDED
 }
