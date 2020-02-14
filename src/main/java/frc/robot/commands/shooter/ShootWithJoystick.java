@@ -9,6 +9,7 @@ import frc.robot.util.xbox.XboxController;
 /**
  * ShootWithJoystick
  */
+
 public class ShootWithJoystick extends CommandBase {
 
     private final Shooter shooter;
@@ -24,5 +25,6 @@ public class ShootWithJoystick extends CommandBase {
         XboxController xb = RobotContainer.getManipulatorController();
         double shooterPower = xb.getY(Hand.kLeft);
         shooter.setSpeed(shooterPower);
+        shooter.setColumnSpeed(xb.getTrigger(Hand.kLeft));
     }
 }

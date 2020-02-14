@@ -36,9 +36,11 @@ public final class Constants {
         // Multiplied by 6 inch wheels
         // Multiplied by PI for diameter
         // Multiplied by 0.0254 for meters
+
         public static final double ENC_COUNTS_PER_METER = 6 * Math.PI * 0.0254;
     }
     public final class Hopper {
+
         public static final int RIGHT_TALON = 65;
         public static final int LEFT_TALON = 64;
 
@@ -47,6 +49,9 @@ public final class Constants {
 
         public static final int LEFT_FALCON = 1;
         public static final int RIGHT_FALCON = 2;
+
+        public static final int FRONT_COLUMN = 3;
+        public static final int BACK_COLUMN = 4;
 
         public static final double RAMP_RATE = 1.5;
 
