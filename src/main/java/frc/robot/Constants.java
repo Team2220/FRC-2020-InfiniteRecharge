@@ -38,7 +38,7 @@ public final class Constants {
         // Multiplied by 0.0254 for meters
         public static final double ENC_COUNTS_PER_METER = 6 * Math.PI * 0.0254;
     }
-    public final class Transfer {
+    public final class Hopper {
         public static final int TALON = 65;
     }
     public static final class ShooterConstants {
