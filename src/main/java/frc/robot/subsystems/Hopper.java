@@ -12,6 +12,8 @@ public class Hopper extends SubsystemBase {
 
 
   public Hopper() {
+
+    rightTalon.follow(leftTalon);
     
   }
 
@@ -21,7 +23,8 @@ public class Hopper extends SubsystemBase {
   }
 
   public void set(double demand) {
+    
       leftTalon.set(ControlMode.PercentOutput, demand);
-      rightTalon.set(ControlMode.PercentOutput, demand);
+  
   }
 }
