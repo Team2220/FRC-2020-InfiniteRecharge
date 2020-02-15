@@ -28,5 +28,4 @@ public class HopperWithButton extends CommandBase {
         super.end(interrupted);
         hopper.setHopper(0);
     }
-
 }

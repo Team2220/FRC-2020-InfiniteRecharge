@@ -15,15 +15,10 @@ public class Climber extends SubsystemBase {
     private TalonFX leftTalon = new TalonFX(ClimberConstants.LEFT_FALCON);
 
     public Climber() {
-
         rightTalon.follow(leftTalon);
-    
     }
 
-public void set(double speed) {
-
-    leftTalon.set(ControlMode.PercentOutput, speed);
-    
-}
-
+    public void set(double speed) {
+        leftTalon.set(ControlMode.PercentOutput, speed);     
+    }
 }

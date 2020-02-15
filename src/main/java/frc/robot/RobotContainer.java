@@ -9,6 +9,7 @@ import frc.robot.subsystems.Intake.Position;
 import frc.robot.util.xbox.XboxController;
 import frc.robot.util.xbox.XboxController.Button;
 import frc.robot.commands.intake.IntakeSetPosition;
+import frc.robot.commands.intake.RunIntake;
 import frc.robot.commands.hopper.HopperWithButton;
 
 /**
@@ -95,8 +96,9 @@ public class RobotContainer {
    * class.
    */
   private void setBinds() {
-    armManagement.getButton(Button.A).whileHeld(new HopperWithButton(hopper));
+    armManagement.getButton(Button.X).whileHeld(new HopperWithButton(hopper));
     armManagement.getButton(Button.RIGHT_BUMPER).whenPressed(new IntakeSetPosition(Position.EXTENDED, intake));
     armManagement.getButton(Button.LEFT_BUMPER).whenPressed(new IntakeSetPosition(Position.RETRACTED, intake));
+    armManagement.getButton(Button.A).whileHeld(new RunIntake(intake));
   }
 }

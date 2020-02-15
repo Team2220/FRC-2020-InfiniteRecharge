@@ -24,9 +24,7 @@ public class Intake extends SubsystemBase {
       IntakeConstants.SOLENOID_REVERSE);
 
   public Intake() {
-
     setDefaultCommand(new IntakeXbox(this));
-
   }
 
   @Override
@@ -48,5 +46,4 @@ public class Intake extends SubsystemBase {
       break;
     }
   }
-
 }
