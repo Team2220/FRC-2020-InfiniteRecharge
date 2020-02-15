@@ -21,7 +21,6 @@ public class Shooter extends SubsystemBase {
     ShuffleboardTab shooterTab = Shuffleboard.getTab("shooter");
 
     public Shooter() {
-
         leftFalcon = new TalonFX(ShooterConstants.LEFT_FALCON);
         rightFalcon = new TalonFX(ShooterConstants.RIGHT_FALCON);
 

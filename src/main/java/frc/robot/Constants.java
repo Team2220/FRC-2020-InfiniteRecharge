@@ -48,7 +48,6 @@ public final class Constants {
         public static final double RAMP_RATE = 0.1;
 
         public static final NeutralMode IDLE_BEHAVIOR = NeutralMode.Brake;
-
     }
 
     public static final class ShooterConstants {
@@ -75,5 +74,6 @@ public final class Constants {
         public static final int TALON = 25;
         public static final int SOLENOID_FORWARD = 2;
         public static final int SOLENOID_REVERSE = 1;
+        public static final double INTAKE_POWER = 0.7;  // TODO find the optimal intake power value
     }
 }

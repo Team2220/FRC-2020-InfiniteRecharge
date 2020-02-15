@@ -13,7 +13,6 @@ public class Hopper extends SubsystemBase {
   private TalonSRX frontTower, backTower;
 
   public Hopper() {
-
     leftHopper = new TalonSRX(HopperConstants.LEFT_HOPPER);
     rightHopper = new TalonSRX(HopperConstants.RIGHT_HOPPER);
     frontTower = new TalonSRX(HopperConstants.FRONT_COLUMN);
@@ -46,16 +45,13 @@ public class Hopper extends SubsystemBase {
 
   @Override
   public void periodic() {
-
   }
 
   public void setHopper(double demand) {
-
     leftHopper.set(ControlMode.PercentOutput, demand);
   }
 
   public void setTower(double demand) {
-
     frontTower.set(ControlMode.PercentOutput, demand);
   }
 }

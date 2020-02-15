@@ -15,7 +15,6 @@ public class IntakeXbox extends CommandBase {
     private final Intake intake;
 
     public IntakeXbox(Intake intake) {
-        
         this.intake = intake;
         addRequirements(intake);
     }
