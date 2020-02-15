@@ -58,6 +58,8 @@ public final class Constants {
 
         public static final double RAMP_RATE = 0.75;
 
+        public static final int SHOT_VELOCITY = 600; // TODO test this for correct shot velocity
+
         public static final NeutralMode IDLE_BEHAVIOR = NeutralMode.Coast;
     }
 

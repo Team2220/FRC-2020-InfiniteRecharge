@@ -45,11 +45,15 @@ public class Shooter extends SubsystemBase {
         setDefaultCommand(new ShootWithJoystick(this));
     }
 
-    public void setSpeed(double speed) {
-        if (Math.abs(speed) > 0.9) {
-            speed = Math.signum(speed) * 0.9;
+    public void setPower(double demand) {
+        if (Math.abs(demand) > 0.95) {
+            demand = Math.signum(demand) * 0.95;
         }
-        leftFalcon.set(TalonFXControlMode.PercentOutput, speed);
+        leftFalcon.set(TalonFXControlMode.PercentOutput, demand);
 
+    }
+
+    public void setVelocity(int demand) {
+        leftFalcon.set(TalonFXControlMode.Velocity, demand);
     }
 }
