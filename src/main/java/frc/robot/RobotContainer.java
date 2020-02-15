@@ -2,8 +2,8 @@ package frc.robot;
 
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Hopper;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.TwilightHorse;
 import frc.robot.subsystems.Intake.Position;
 import frc.robot.util.xbox.XboxController;
@@ -19,18 +19,18 @@ import frc.robot.commands.hopper.HopperWithButton;
  * @author 2220
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final Intake intake = new Intake();
-  private final Shooter shooter;
-  private final Hopper hopper = new Hopper();
-  private final Climber climber = new Climber();
-
 
   // Singleton instance
   private static RobotContainer instance;
 
   // Drivetrain subsystem
   private TwilightHorse drivetrain;
+
+  // Mechanism subsystems
+  private final Intake intake;
+  private final Shooter shooter;
+  private final Hopper hopper;
+  private final Climber climber;
 
   // Driver controllers
   private final XboxController driverController = new XboxController(0);
@@ -52,6 +52,9 @@ public class RobotContainer {
     drivetrain = TwilightHorse.getInstance();
 
     shooter = new Shooter();
+    intake = new Intake();
+    hopper = new Hopper();
+    climber = new Climber();
 
     // Must happen last in constructor
     setBinds();
@@ -93,7 +96,7 @@ public class RobotContainer {
    */
   private void setBinds() {
     armManagement.getButton(Button.A).whileHeld(new HopperWithButton(hopper));
-    armManagement.getButton(Button.RIGHT_BUMPER).whenPressed(new IntakeSetPosition( Position.EXTENDED, intake));
-    armManagement.getButton(Button.LEFT_BUMPER).whenPressed(new IntakeSetPosition( Position.RETRACTED, intake));
+    armManagement.getButton(Button.RIGHT_BUMPER).whenPressed(new IntakeSetPosition(Position.EXTENDED, intake));
+    armManagement.getButton(Button.LEFT_BUMPER).whenPressed(new IntakeSetPosition(Position.RETRACTED, intake));
   }
 }

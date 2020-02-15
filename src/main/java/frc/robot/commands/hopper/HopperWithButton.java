@@ -20,13 +20,13 @@ public class HopperWithButton extends CommandBase {
     @Override
     public void initialize() {
         super.initialize();
-        hopper.set(HOPPER_POWER);
+        hopper.setHopper(HOPPER_POWER);
     }
 
     @Override
     public void end(boolean interrupted) {
         super.end(interrupted);
-        hopper.set(0);
+        hopper.setHopper(0);
     }
 
 }

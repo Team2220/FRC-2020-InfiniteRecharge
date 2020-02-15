@@ -2,6 +2,7 @@ package frc.robot;
 
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 /**
  * Centralized location for all constants. Following new WPI convention of
  * making inner static classes for each subsystem. CAN IDs should go inside
@@ -10,11 +11,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
  * @author 2220
  */
 public final class Constants {
-    public final class Intake {
-        public static final int TALON = 25; 
-        public static final int SOLENOID_FORWARD = 2;
-        public static final int SOLENOID_REVERSE = 1;
-    }
+
     /**
      * Constants related to the drivetrain.
      */
@@ -27,10 +24,11 @@ public final class Constants {
         public static final int RIGHT_FOLLOWER = 3;
 
         // Drivetrain idle behavior while driving
-        public static final IdleMode idleBehavior = IdleMode.kBrake; // TODO see if brake or coast is better for driving
+        public static final IdleMode IDLE_BEHAVIOR = IdleMode.kBrake; // TODO see if brake or coast is better for
+                                                                      // driving
 
         // Drivetrain open loop ramp rate in seconds
-        public static final double RAMP_RATE = 1; // TODO much testing needs to be done here
+        public static final double RAMP_RATE = 0.25; // TODO much testing needs to be done here
 
         // NEOs have 1 encoder count per revolution
         // Multiplied by 6 inch wheels
@@ -39,29 +37,41 @@ public final class Constants {
 
         public static final double ENC_COUNTS_PER_METER = 6 * Math.PI * 0.0254;
     }
-    public final class Hopper {
 
-        public static final int RIGHT_TALON = 65;
-        public static final int LEFT_TALON = 64;
+    public static final class HopperConstants {
+
+        public static final int LEFT_HOPPER = 64;
+        public static final int RIGHT_HOPPER = 65;
+        public static final int FRONT_COLUMN = 3;
+        public static final int BACK_COLUMN = 4;
+
+        public static final double RAMP_RATE = 0.1;
+
+        public static final NeutralMode IDLE_BEHAVIOR = NeutralMode.Brake;
 
     }
+
     public static final class ShooterConstants {
 
         public static final int LEFT_FALCON = 1;
         public static final int RIGHT_FALCON = 2;
 
-        public static final int FRONT_COLUMN = 3;
-        public static final int BACK_COLUMN = 4;
-
-        public static final double RAMP_RATE = 1.5;
+        public static final double RAMP_RATE = 0.75;
 
         public static final NeutralMode IDLE_BEHAVIOR = NeutralMode.Coast;
     }
-    public final class ClimberConstants {
+
+    public static final class ClimberConstants {
 
         public static final int RIGHT_FALCON = 6;
         public static final int LEFT_FALCON = 7;
 
     }
-}
 
+    public static final class IntakeConstants {
+
+        public static final int TALON = 25;
+        public static final int SOLENOID_FORWARD = 2;
+        public static final int SOLENOID_REVERSE = 1;
+    }
+}
