@@ -77,7 +77,7 @@ public class RobotContainer {
    * Getter for the driver controller.
    * 
    * @return The driver controller.
-  */
+   */
   public static XboxController getDriverController() {
     return getInstance().driverController;
   }
@@ -96,9 +96,16 @@ public class RobotContainer {
    * class.
    */
   private void setBinds() {
-    armManagement.getButton(Button.X).whileHeld(new HopperWithButton(hopper));
+
+    // Extend and retract intake manually
     armManagement.getButton(Button.RIGHT_BUMPER).whenPressed(new IntakeSetPosition(Position.EXTENDED, intake));
     armManagement.getButton(Button.LEFT_BUMPER).whenPressed(new IntakeSetPosition(Position.RETRACTED, intake));
+
+    // Run intake and hopper automatically
     armManagement.getButton(Button.A).whileHeld(new RunIntake(intake));
+    armManagement.getButton(Button.A).whileHeld(new HopperWithButton(hopper));
+
+    // Run tower
+    armManagement.getButton(Button.X).whileHeld(new RunTower(hopper));
   }
 }
