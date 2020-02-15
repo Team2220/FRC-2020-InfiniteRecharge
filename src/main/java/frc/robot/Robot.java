@@ -53,39 +53,12 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
   }
 
-  CANSparkMax leftMaster, leftSlave, rightMaster, rightSlave;
-  XboxController xb = new XboxController(0);
-
   @Override
   public void testInit() {
     CommandScheduler.getInstance().cancelAll();
-    /**
-     * CHECK IDs BEFORE RUNNING!!
-     */
-    leftMaster = new CANSparkMax(0, MotorType.kBrushless);
-    leftSlave = new CANSparkMax(1, MotorType.kBrushless);
-    rightMaster = new CANSparkMax(2, MotorType.kBrushless);
-    rightSlave = new CANSparkMax(3, MotorType.kBrushless);
-
-    leftMaster.setInverted(false);
-    leftSlave.setInverted(false);
-    rightMaster.setInverted(false);
-    rightSlave.setInverted(false);
-
-    // leftSlave.follow(leftMaster);
-    // rightSlave.follow(rightMaster);
   }
 
   @Override
   public void testPeriodic() {
-    double s = 0.95;
-    leftMaster.set(s);
-    // leftSlave.set(s);
-    rightMaster.set(s);
-    // rightSlave.set(s);
-
-    // After directions are set properly
-    // leftMaster.set(xb.getY(Hand.kLeft) * 0.95);
-    // leftMaster.set(xb.getY(Hand.kRight) * 0.95);
   }
 }
