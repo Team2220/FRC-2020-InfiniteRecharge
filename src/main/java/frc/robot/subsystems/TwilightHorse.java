@@ -74,7 +74,7 @@ public class TwilightHorse extends SubsystemBase {
         rightEncoder = rightLeader.getEncoder();
 
         // Set drivetrain idle mode
-        setIdleBehavior(DrivetrainConstants.idleBehavior);
+        setIdleBehavior(DrivetrainConstants.IDLE_BEHAVIOR);
 
         // Set drivetrain ramp rate
         setOpenLoopRampRate(DrivetrainConstants.RAMP_RATE);
@@ -101,7 +101,7 @@ public class TwilightHorse extends SubsystemBase {
         odometry.update(Rotation2d.fromDegrees(navX.getAngle()), leftMeters, rightMeters);
 
         // Keep drivetrain in default idle mode
-        setIdleBehavior(DrivetrainConstants.idleBehavior);
+        setIdleBehavior(DrivetrainConstants.IDLE_BEHAVIOR);
     }
 
     /**
