@@ -10,7 +10,6 @@ public class HopperWithButton extends CommandBase {
     private final Hopper hopper;
 
     public HopperWithButton(Hopper hopper) {
-
         this.hopper = hopper;
         addRequirements(hopper);
     }
