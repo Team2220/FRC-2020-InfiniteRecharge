@@ -19,6 +19,13 @@ import frc.robot.commands.shooter.ShootWithJoystick;
 
 public class Shooter extends SubsystemBase {
 
+    private static double P = 0;
+    private static double I = 0;
+    private static double D = 0;
+    private static double F = 0;
+    private static final int MAX_VEL = 750;
+    private static final int MAX_ACCEL = 350;
+
     TalonFX leftFalcon, rightFalcon;
     TalonSRX frontColumnTalonSRX, backColumnTalonSRX;
 
@@ -55,6 +62,13 @@ public class Shooter extends SubsystemBase {
         shooterTab.addNumber("left falcon velocity", () -> leftFalcon.getSelectedSensorVelocity());
         shooterTab.addNumber("right falcon velocity", () -> rightFalcon.getSelectedSensorVelocity());
 
+        leftFalcon.config_kP(0, P);
+        leftFalcon.config_kI(0, I);
+        leftFalcon.config_kD(0, D);
+        leftFalcon.config_kF(0, F);
+        leftFalcon.configMotionAcceleration(MAX_ACCEL);
+        leftFalcon.configMotionCruiseVelocity(MAX_VEL);
+
         setDefaultCommand(new ShootWithJoystick(this));
     }
 
@@ -63,6 +77,12 @@ public class Shooter extends SubsystemBase {
             speed = Math.signum(speed) * 0.9;
         }
         leftFalcon.set(TalonFXControlMode.PercentOutput, speed);
+
+    }
+
+    public void setVelocity(double velocity) {
+
+        leftFalcon.set(TalonFXControlMode.Velocity, velocity);
 
     }
 
