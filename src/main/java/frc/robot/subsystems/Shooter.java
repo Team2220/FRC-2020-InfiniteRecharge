@@ -87,7 +87,7 @@ public class Shooter extends SubsystemBase {
     }
 
     public void setColumnSpeed(double speed) {
-        
+
         frontColumnTalonSRX.set(ControlMode.PercentOutput, speed);
     }
 }

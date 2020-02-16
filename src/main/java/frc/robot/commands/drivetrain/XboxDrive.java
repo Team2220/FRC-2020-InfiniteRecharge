@@ -17,7 +17,6 @@ public class XboxDrive extends CommandBase {
     // Drivetrain subsystem
     private final TwilightHorse drivetrain;
 
-
     /**
      * Constructor for XboxDrive command.
      * 
@@ -29,7 +28,7 @@ public class XboxDrive extends CommandBase {
 
         // Initialize instance variables
         this.drivetrain = drivetrain;
-        
+
     }
 
     /**

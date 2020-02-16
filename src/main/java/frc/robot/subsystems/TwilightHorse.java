@@ -56,7 +56,7 @@ public class TwilightHorse extends SubsystemBase {
         // Initialize navX
         navX = new AHRS();
 
-        //Initialize distance sensor
+        // Initialize distance sensor
         distanceSensor = new Rev2mDistanceSensor(Port.kOnboard, Unit.kInches, RangeProfile.kDefault);
         distanceSensor.setAutomaticMode(true);
 
@@ -119,8 +119,8 @@ public class TwilightHorse extends SubsystemBase {
     /**
      * Uses distance sensor to find distance in inches.
      * 
-     * @return The distance measured by the distance sensor. 
-     * If distance not valid, returns -1.
+     * @return The distance measured by the distance sensor. If distance not valid,
+     *         returns -1.
      */
     public double getRange() {
         return distanceSensor.getRange();

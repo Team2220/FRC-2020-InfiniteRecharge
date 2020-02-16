@@ -3,9 +3,9 @@ package frc.robot.commands.intake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 
-/** 
-* @author vish: strong supporter of R22_D20
-*/
+/**
+ * @author vish: strong supporter of R22_D20
+ */
 
 public class IntakeSetPosition extends CommandBase {
 
@@ -17,14 +17,13 @@ public class IntakeSetPosition extends CommandBase {
         this.intake = intake;
         addRequirements();
     }
-    
+
     @Override
     public void execute() {
         intake.setPosition(position);
         /*
-        XboxController xb = RobotContainer.getManipulatorController();
-        double intakePower = xb.getY(Hand.kRight);
-        intake.setSpeed(intakePower);
-        */
+         * XboxController xb = RobotContainer.getManipulatorController(); double
+         * intakePower = xb.getY(Hand.kRight); intake.setSpeed(intakePower);
+         */
     }
 }

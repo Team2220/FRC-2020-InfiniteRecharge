@@ -9,19 +9,20 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.commands.intake.IntakeXbox;
 
-/** 
-* @author vish: strong supporter of R22_D20
-*/
+/**
+ * @author vish: strong supporter of R22_D20
+ */
 
 public class Intake extends SubsystemBase {
 
-public enum Position {
-  RETRACTED,
-  EXTENDED
-}
+  public enum Position {
+    RETRACTED, EXTENDED
+  }
 
-private TalonSRX talon = new TalonSRX(Constants.Intake.TALON);
-private DoubleSolenoid solenoid = new DoubleSolenoid(Constants.Intake.SOLENOID_FORWARD, Constants.Intake.SOLENOID_REVERSE);
+  private TalonSRX talon = new TalonSRX(Constants.Intake.TALON);
+  private DoubleSolenoid solenoid = new DoubleSolenoid(Constants.Intake.SOLENOID_FORWARD,
+      Constants.Intake.SOLENOID_REVERSE);
+
   public Intake() {
 
     setDefaultCommand(new IntakeXbox(this));
@@ -33,19 +34,19 @@ private DoubleSolenoid solenoid = new DoubleSolenoid(Constants.Intake.SOLENOID_F
 
   }
 
-public void setSpeed(double demand) {
-  talon.set(ControlMode.PercentOutput, demand);
-}
-
-public void setPosition(Position deploy) {
-  switch (deploy) {
-    case EXTENDED: 
-    solenoid.set(Value.kForward);
-    break;
-    case RETRACTED:
-    solenoid.set(Value.kReverse);
-    break;
+  public void setSpeed(double demand) {
+    talon.set(ControlMode.PercentOutput, demand);
   }
-}
+
+  public void setPosition(Position deploy) {
+    switch (deploy) {
+    case EXTENDED:
+      solenoid.set(Value.kForward);
+      break;
+    case RETRACTED:
+      solenoid.set(Value.kReverse);
+      break;
+    }
+  }
 
 }

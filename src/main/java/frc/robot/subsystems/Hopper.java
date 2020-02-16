@@ -10,11 +10,10 @@ public class Hopper extends SubsystemBase {
   private TalonSRX leftTalon = new TalonSRX(Constants.Hopper.LEFT_TALON);
   private TalonSRX rightTalon = new TalonSRX(Constants.Hopper.RIGHT_TALON);
 
-
   public Hopper() {
 
     rightTalon.follow(leftTalon);
-    
+
   }
 
   @Override
@@ -23,8 +22,8 @@ public class Hopper extends SubsystemBase {
   }
 
   public void set(double demand) {
-    
-      leftTalon.set(ControlMode.PercentOutput, demand);
-  
+
+    leftTalon.set(ControlMode.PercentOutput, demand);
+
   }
 }

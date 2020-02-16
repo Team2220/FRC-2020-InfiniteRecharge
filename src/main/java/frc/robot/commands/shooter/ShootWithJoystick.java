@@ -13,13 +13,12 @@ import frc.robot.util.xbox.XboxController;
 public class ShootWithJoystick extends CommandBase {
 
     private final Shooter shooter;
-    
 
     public ShootWithJoystick(Shooter shooter) {
         this.shooter = shooter;
         addRequirements(shooter);
     }
-    
+
     @Override
     public void execute() {
         XboxController xb = RobotContainer.getManipulatorController();

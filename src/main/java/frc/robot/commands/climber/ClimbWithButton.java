@@ -16,7 +16,7 @@ public class ClimbWithButton extends CommandBase {
     private final Position position;
     private final Climber climber;
 
-    public ClimbWithButton(Position position ,Climber climber) {
+    public ClimbWithButton(Position position, Climber climber) {
 
         this.climber = climber;
         this.position = position;
