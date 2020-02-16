@@ -9,6 +9,8 @@ public class HopperWithButton extends CommandBase {
 
     private final Hopper hopper;
 
+    private static final double HOPPER_POWER = 0.5;
+
     public HopperWithButton(Hopper hopper) {
         this.hopper = hopper;
         addRequirements(hopper);
@@ -17,7 +19,7 @@ public class HopperWithButton extends CommandBase {
     @Override
     public void initialize() {
         super.initialize();
-        hopper.set(0.5);
+        hopper.set(HOPPER_POWER);
     }
 
     @Override
