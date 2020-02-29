@@ -57,8 +57,8 @@ public class TwilightHorse extends SubsystemBase {
         navX = new AHRS();
 
         // Initialize distance sensor
-        distanceSensor = new Rev2mDistanceSensor(Port.kOnboard, Unit.kInches, RangeProfile.kDefault);
-        distanceSensor.setAutomaticMode(true);
+        // distanceSensor = new Rev2mDistanceSensor(Port.kOnboard, Unit.kInches, RangeProfile.kDefault);
+        // distanceSensor.setAutomaticMode(true);
 
         // Initialize drivetrain odometer
         odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(navX.getAngle()));
@@ -69,6 +69,15 @@ public class TwilightHorse extends SubsystemBase {
         rightLeader.restoreFactoryDefaults();
         rightFollower.restoreFactoryDefaults();
 
+        /**
+         * Limits current to 40 Amps to prevent motor burnout
+         */
+        leftLeader.setSmartCurrentLimit(40);
+        leftFollower.setSmartCurrentLimit(40);
+        rightLeader.setSmartCurrentLimit(40);
+        rightFollower.setSmartCurrentLimit(40);
+
+
         // Initialize the drive motor encoders
         leftEncoder = leftLeader.getEncoder();
         rightEncoder = rightLeader.getEncoder();
@@ -78,6 +87,9 @@ public class TwilightHorse extends SubsystemBase {
 
         // Set drivetrain ramp rate
         setOpenLoopRampRate(DrivetrainConstants.RAMP_RATE);
+        
+        leftLeader.setInverted(true);
+        rightLeader.setInverted(true);
 
         // Follow leader motors
         leftFollower.follow(leftLeader);

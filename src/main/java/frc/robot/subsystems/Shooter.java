@@ -38,10 +38,10 @@ public class Shooter extends SubsystemBase {
         frontColumnTalonSRX = new TalonSRX(ShooterConstants.FRONT_COLUMN);
         backColumnTalonSRX = new TalonSRX(ShooterConstants.BACK_COLUMN);
 
-        leftFalcon.configFactoryDefault();
-        rightFalcon.configFactoryDefault();
-        frontColumnTalonSRX.configFactoryDefault();
-        backColumnTalonSRX.configFactoryDefault();
+        // leftFalcon.configFactoryDefault();
+        // rightFalcon.configFactoryDefault();
+        // frontColumnTalonSRX.configFactoryDefault();
+        // backColumnTalonSRX.configFactoryDefault();
 
         rightFalcon.follow(leftFalcon);
         backColumnTalonSRX.follow(frontColumnTalonSRX);
@@ -59,8 +59,8 @@ public class Shooter extends SubsystemBase {
         frontColumnTalonSRX.setNeutralMode(ShooterConstants.IDLE_BEHAVIOR);
         backColumnTalonSRX.setNeutralMode(ShooterConstants.IDLE_BEHAVIOR);
 
-        shooterTab.addNumber("left falcon velocity", () -> leftFalcon.getSelectedSensorVelocity());
-        shooterTab.addNumber("right falcon velocity", () -> rightFalcon.getSelectedSensorVelocity());
+        // shooterTab.addNumber("left falcon velocity", () -> leftFalcon.getSelectedSensorVelocity());
+        // shooterTab.addNumber("right falcon velocity", () -> rightFalcon.getSelectedSensorVelocity());
 
         leftFalcon.config_kP(0, P);
         leftFalcon.config_kI(0, I);
