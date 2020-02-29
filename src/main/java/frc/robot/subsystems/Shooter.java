@@ -48,8 +48,8 @@ public class Shooter extends SubsystemBase {
 
         leftFalcon.setInverted(TalonFXInvertType.Clockwise);
         rightFalcon.setInverted(TalonFXInvertType.CounterClockwise);
-        frontColumnTalonSRX.setInverted(InvertType.InvertMotorOutput);
-        backColumnTalonSRX.setInverted(InvertType.InvertMotorOutput);
+        frontColumnTalonSRX.setInverted(InvertType.None);
+        backColumnTalonSRX.setInverted(InvertType.None);
 
         leftFalcon.configOpenloopRamp(ShooterConstants.RAMP_RATE);
         rightFalcon.configOpenloopRamp(ShooterConstants.RAMP_RATE);

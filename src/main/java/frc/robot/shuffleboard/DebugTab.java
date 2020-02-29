@@ -11,8 +11,8 @@ public class DebugTab {
 
     public DebugTab(XboxController driverController){
 
-        tab.addNumber("lJoystick Value", () -> driverController.getY(Hand.kLeft)).withPosition(3, 1);
-        tab.addNumber("Joystick Valu", () -> driverController.getX(Hand.kRight)).withPosition(3, 2);
-        
+        tab.addNumber("L Joystick Value", () -> driverController.getY(Hand.kLeft)).withPosition(3, 1);
+        tab.addNumber("R Joystick Value", () -> driverController.getX(Hand.kRight)).withPosition(3, 2);
     }
+
 }

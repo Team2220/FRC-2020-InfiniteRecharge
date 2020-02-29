@@ -11,9 +11,9 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
  */
 public final class Constants {
     public final class Intake {
-        public static final int TALON = 25; 
-        public static final int SOLENOID_FORWARD = 2;
-        public static final int SOLENOID_REVERSE = 1;
+        public static final int TALON = 5; 
+        public static final int SOLENOID_FORWARD = 6;
+        public static final int SOLENOID_REVERSE = 7;
     }
     /**
      * Constants related to the drivetrain.
@@ -41,17 +41,17 @@ public final class Constants {
     }
     public final class Hopper {
 
-        public static final int RIGHT_TALON = 65;
-        public static final int LEFT_TALON = 64;
+        public static final int RIGHT_TALON = 4;
+        public static final int LEFT_TALON = 2;
 
     }
     public static final class ShooterConstants {
 
-        public static final int LEFT_FALCON = 1;
-        public static final int RIGHT_FALCON = 2;
+        public static final int LEFT_FALCON = 7;
+        public static final int RIGHT_FALCON = 8;
 
         public static final int FRONT_COLUMN = 3;
-        public static final int BACK_COLUMN = 4;
+        public static final int BACK_COLUMN = 6;
 
         public static final double RAMP_RATE = 1.5;
 
@@ -59,8 +59,8 @@ public final class Constants {
     }
     public final class ClimberConstants {
 
-        public static final int RIGHT_FALCON = 6;
-        public static final int LEFT_FALCON = 7;
+        public static final int RIGHT_FALCON = 9;
+        public static final int LEFT_FALCON = 10;
 
     }
 }

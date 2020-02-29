@@ -42,7 +42,7 @@ public class XboxDrive extends CommandBase {
         double power = mutateJoystick(rawPower, Hand.kLeft);
 
         // Turning power
-        double rawSpin = driverController.getX(Hand.kRight);
+        double rawSpin = driverController.getX(Hand.kRight) * -1;
         double spin = mutateJoystick(rawSpin, Hand.kRight);
 
         // Input movement powers into drivetrain controller

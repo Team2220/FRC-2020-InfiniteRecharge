@@ -69,9 +69,8 @@ public class TwilightHorse extends SubsystemBase {
         rightLeader.restoreFactoryDefaults();
         rightFollower.restoreFactoryDefaults();
 
-        /**
-         * Limits current to 40 Amps to prevent motor burnout
-         */
+      
+        //Limits current to 40 Amps to prevent motor burnout
         leftLeader.setSmartCurrentLimit(40);
         leftFollower.setSmartCurrentLimit(40);
         rightLeader.setSmartCurrentLimit(40);
@@ -88,6 +87,7 @@ public class TwilightHorse extends SubsystemBase {
         // Set drivetrain ramp rate
         setOpenLoopRampRate(DrivetrainConstants.RAMP_RATE);
         
+        //Inversions for directionality
         leftLeader.setInverted(true);
         rightLeader.setInverted(true);
 
