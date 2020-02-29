@@ -10,11 +10,14 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
  * @author 2220
  */
 public final class Constants {
-    public final class Intake {
-        public static final int TALON = 5; 
-        public static final int SOLENOID_FORWARD = 6;
-        public static final int SOLENOID_REVERSE = 7;
+    
+    public final class ClimberConstants {
+
+        public static final int RIGHT_FALCON = 9;
+        public static final int LEFT_FALCON = 10;
+
     }
+
     /**
      * Constants related to the drivetrain.
      */
@@ -39,12 +42,20 @@ public final class Constants {
 
         public static final double ENC_COUNTS_PER_METER = 6 * Math.PI * 0.0254;
     }
+
     public final class Hopper {
 
         public static final int RIGHT_TALON = 4;
         public static final int LEFT_TALON = 2;
 
     }
+
+    public final class Intake {
+        public static final int TALON = 5; 
+        public static final int SOLENOID_FORWARD = 6;
+        public static final int SOLENOID_REVERSE = 7;
+    }
+
     public static final class ShooterConstants {
 
         public static final int LEFT_FALCON = 7;
@@ -56,12 +67,6 @@ public final class Constants {
         public static final double RAMP_RATE = 1.5;
 
         public static final NeutralMode IDLE_BEHAVIOR = NeutralMode.Coast;
-    }
-    public final class ClimberConstants {
-
-        public static final int RIGHT_FALCON = 9;
-        public static final int LEFT_FALCON = 10;
-
     }
 }
 
