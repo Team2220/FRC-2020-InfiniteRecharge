@@ -23,7 +23,7 @@ public class ShootWithJoystick extends CommandBase {
     public void execute() {
         XboxController xb = RobotContainer.getManipulatorController();
         double shooterPower = xb.getY(Hand.kLeft);
-        shooter.setSpeed(shooterPower);
+        shooter.setPower(shooterPower);
         shooter.setColumnSpeed(xb.getTrigger(Hand.kLeft));
     }
 }

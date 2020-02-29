@@ -43,14 +43,14 @@ public final class Constants {
         public static final double ENC_COUNTS_PER_METER = 6 * Math.PI * 0.0254;
     }
 
-    public final class Hopper {
+    public final class HopperConstants {
 
         public static final int RIGHT_TALON = 4;
         public static final int LEFT_TALON = 2;
 
     }
 
-    public final class Intake {
+    public final class IntakeConstants {
         public static final int TALON = 5; 
         public static final int SOLENOID_FORWARD = 6;
         public static final int SOLENOID_REVERSE = 7;

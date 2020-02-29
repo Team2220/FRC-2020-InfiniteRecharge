@@ -9,6 +9,8 @@ import frc.robot.subsystems.Intake.Position;
 import frc.robot.util.xbox.XboxController;
 import frc.robot.util.xbox.XboxController.Button;
 import frc.robot.commands.intake.IntakeSetPosition;
+import frc.robot.commands.shooter.ShootWithPower;
+import frc.robot.commands.shooter.ShootWithVelocity;
 import frc.robot.shuffleboard.DebugTab;
 import frc.robot.commands.climber.ClimbWithButton;
 import frc.robot.commands.hopper.HopperWithButton;
@@ -27,7 +29,6 @@ public class RobotContainer {
   private final Hopper hopper = new Hopper();
   private final Climber climber = new Climber();
 
-
   // Singleton instance
   private static RobotContainer instance;
 
@@ -38,7 +39,7 @@ public class RobotContainer {
   private final XboxController driverController = new XboxController(0);
   private final XboxController armManagement = new XboxController(1);
 
-  //Shuffleboard
+  // Shuffleboard
   private final DebugTab debugTab = new DebugTab(driverController);
 
   // Singleton constructor
@@ -78,7 +79,7 @@ public class RobotContainer {
    * Getter for the driver controller.
    * 
    * @return The driver controller.
-  */
+   */
   public static XboxController getDriverController() {
     return getInstance().driverController;
   }
@@ -102,5 +103,6 @@ public class RobotContainer {
     armManagement.getButton(Button.LEFT_BUMPER).whenPressed(new IntakeSetPosition(Position.RETRACTED, intake));
     armManagement.getButton(Button.X).whileHeld(new ClimbWithButton(ClimbWithButton.Position.EXTENDED, climber));
     armManagement.getButton(Button.Y).whileHeld(new ClimbWithButton(ClimbWithButton.Position.RETRACTED, climber));
+    armManagement.getButton(Button.B).whileHeld(new ShootWithVelocity(10922, shooter));
   }
 }

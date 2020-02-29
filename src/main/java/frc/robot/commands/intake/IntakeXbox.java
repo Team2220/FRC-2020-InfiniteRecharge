@@ -24,6 +24,6 @@ public class IntakeXbox extends CommandBase {
     public void execute() {
         XboxController xb = RobotContainer.getManipulatorController();
         double intakePower = xb.getY(Hand.kRight);
-        intake.setSpeed(intakePower);
+        intake.setPower(intakePower);
     }
 }

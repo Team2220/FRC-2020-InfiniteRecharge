@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -19,13 +20,16 @@ public class Intake extends SubsystemBase {
     RETRACTED, EXTENDED
   }
 
-  private TalonSRX talon = new TalonSRX(Constants.Intake.TALON);
-  private DoubleSolenoid solenoid = new DoubleSolenoid(Constants.Intake.SOLENOID_FORWARD,
-      Constants.Intake.SOLENOID_REVERSE);
+  private TalonSRX talon = new TalonSRX(Constants.IntakeConstants.TALON);
+  private DoubleSolenoid solenoid = new DoubleSolenoid(Constants.IntakeConstants.SOLENOID_FORWARD,
+      Constants.IntakeConstants.SOLENOID_REVERSE);
 
   public Intake() {
 
     setDefaultCommand(new IntakeXbox(this));
+    talon.configFactoryDefault();
+    talon.configContinuousCurrentLimit(15);
+    talon.setInverted(InvertType.InvertMotorOutput);
 
   }
 
@@ -34,7 +38,7 @@ public class Intake extends SubsystemBase {
 
   }
 
-  public void setSpeed(double demand) {
+  public void setPower(double demand) {
     talon.set(ControlMode.PercentOutput, demand);
   }
 
