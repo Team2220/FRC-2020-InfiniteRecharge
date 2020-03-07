@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
@@ -23,7 +24,8 @@ public class Shooter extends SubsystemBase {
     private static double kS = -0.027;
     private static double kV = 0.3;
     private static double kA = 0.0639;
-    private static double velocitySetPoint = 8;
+    private static double velocitySetPoint = 2;
+    // public static double kVelocity = velocitySetPoint * 2048 * (16.0 / 24);
     private static SimpleMotorFeedforward fCalc = new SimpleMotorFeedforward(kS, kV, kA);
     private static double P = 0.000545;
     private static double I = 0;
@@ -72,11 +74,13 @@ public class Shooter extends SubsystemBase {
         shooterTab.addNumber("right falcon velocity", () -> rightFalcon.getSelectedSensorVelocity());
         shooterTab.addNumber("left falcon position", () -> leftFalcon.getSelectedSensorPosition());
         shooterTab.addNumber("right falcon position", () -> rightFalcon.getSelectedSensorPosition());
+        shooterTab.addNumber("velocity difference", () -> (rightFalcon.getSelectedSensorVelocity() - leftFalcon.getSelectedSensorVelocity()));
+        shooterTab.addNumber("left falcon real rps", () -> (leftFalcon.getSelectedSensorVelocity() * 10 / 2048));
 
         leftFalcon.config_kP(0, P);
         leftFalcon.config_kI(0, I);
         leftFalcon.config_kD(0, D);
-        leftFalcon.config_kF(0, F);
+        leftFalcon.config_kF(0, 0);
         // leftFalcon.configMotionAcceleration(MAX_ACCEL);
         // leftFalcon.configMotionCruiseVelocity(MAX_VEL);
 
@@ -88,22 +92,24 @@ public class Shooter extends SubsystemBase {
         setDefaultCommand(new ShootWithJoystick(this));
     }
 
+    // private double nativeUnitsToFlyWheelRPS(double nativeUnits) {
+    //     double value = nativeUnits / 2048; // divide by encoder counts per rotation to get rotations/100ms
+    //     value = value * 10; // multiply by 10 to 
+    // }
+
     public void setPower(double speed) {
         if (Math.abs(speed) > 0.9) {
             speed = Math.signum(speed) * 0.9;
         }
         leftFalcon.set(TalonFXControlMode.PercentOutput, speed);
-
     }
 
     public void setVelocity(double velocity) {
-
+        // double velocity = rps * 2048 * (16.0 / 24);
         leftFalcon.set(TalonFXControlMode.Velocity, velocity);
-
     }
 
     public void setColumnSpeed(double speed) {
-
         frontColumnTalonSRX.set(ControlMode.PercentOutput, speed);
     }
 }

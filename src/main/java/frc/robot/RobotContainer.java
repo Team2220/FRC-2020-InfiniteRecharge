@@ -103,6 +103,6 @@ public class RobotContainer {
     armManagement.getButton(Button.LEFT_BUMPER).whenPressed(new IntakeSetPosition(Position.RETRACTED, intake));
     armManagement.getButton(Button.X).whileHeld(new ClimbWithButton(ClimbWithButton.Position.EXTENDED, climber));
     armManagement.getButton(Button.Y).whileHeld(new ClimbWithButton(ClimbWithButton.Position.RETRACTED, climber));
-    armManagement.getButton(Button.B).whileHeld(new ShootWithVelocity(10922, shooter));
+    armManagement.getButton(Button.B).whileHeld(new ShootWithVelocity(1000, shooter));
   }
 }
