@@ -18,9 +18,6 @@ public class XboxDrive extends CommandBase {
     // Drivetrain subsystem
     private final TwilightHorse drivetrain;
 
-    // Xbox Controller
-    private final XboxController driverController;
-
     /**
      * Constructor for XboxDrive command.
      * 
@@ -32,7 +29,7 @@ public class XboxDrive extends CommandBase {
 
         // Initialize instance variables
         this.drivetrain = drivetrain;
-        driverController = RobotContainer.getDriverController();
+
     }
 
     /**
@@ -41,7 +38,7 @@ public class XboxDrive extends CommandBase {
     @Override
     public void initialize() {
         // Ensures that drivetrain is in default idle behavior
-        drivetrain.setIdleBehavior(DrivetrainConstants.idleBehavior);
+        drivetrain.setIdleBehavior(DrivetrainConstants.IDLE_BEHAVIOR);
     }
 
     /**
@@ -49,12 +46,13 @@ public class XboxDrive extends CommandBase {
      */
     @Override
     public void execute() {
+        XboxController driverController = RobotContainer.getDriverController();
         // Forward and reverse power
         double rawPower = driverController.getY(Hand.kLeft);
         double power = mutateJoystick(rawPower, Hand.kLeft);
 
         // Turning power
-        double rawSpin = driverController.getX(Hand.kRight);
+        double rawSpin = driverController.getX(Hand.kRight) * -1;
         double spin = mutateJoystick(rawSpin, Hand.kRight);
 
         // Input movement powers into drivetrain controller
@@ -84,6 +82,7 @@ public class XboxDrive extends CommandBase {
         }
 
         // Get controller deadzone
+        XboxController driverController = RobotContainer.getDriverController();
         final double deadzone = driverController.getDeadzone(hand);
 
         // Exponent to curve joystick value TODO test out what curve (if any) is best
