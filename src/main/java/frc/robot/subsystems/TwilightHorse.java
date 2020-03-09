@@ -88,9 +88,6 @@ public class TwilightHorse extends SubsystemBase {
         double leftMeters = leftEncoder.getPosition() * DrivetrainConstants.ENC_COUNTS_PER_METER;
         double rightMeters = rightEncoder.getPosition() * DrivetrainConstants.ENC_COUNTS_PER_METER;
         odometry.update(Rotation2d.fromDegrees(navX.getAngle()), leftMeters, rightMeters);
-
-        // Keep drivetrain in default idle mode
-        setIdleBehavior(DrivetrainConstants.idleBehavior);
     }
 
     /**

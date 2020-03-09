@@ -1,5 +1,7 @@
 package frc.robot;
 
+import com.revrobotics.CANSparkMax.IdleMode;
+
 import frc.robot.subsystems.TwilightHorse;
 import frc.robot.util.xbox.XboxController;
 
@@ -76,5 +78,14 @@ public class RobotContainer {
    * class.
    */
   private void setBinds() {
+  }
+
+  /**
+   * Anything that subsytems need to do when the robot becomes disabled.
+   */
+  public void disabledInit() {
+
+    // Coast drivetrain motors for easier manual movement
+    drivetrain.setIdleBehavior(IdleMode.kCoast);
   }
 }

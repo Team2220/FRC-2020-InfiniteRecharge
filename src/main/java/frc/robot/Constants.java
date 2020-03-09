@@ -33,5 +33,11 @@ public final class Constants {
         // Multiplied by PI for diameter
         // Multiplied by 0.0254 for meters
         public static final double ENC_COUNTS_PER_METER = 6 * Math.PI * 0.0254;
+
+        // Drivetrain PIDF values TODO need to actually be characterized
+        public static double kP = 0;
+        public static double kI = 0;
+        public static double kD = 0;
+        public static double kF = 0;
     }
 }

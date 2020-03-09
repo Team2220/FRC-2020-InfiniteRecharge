@@ -32,8 +32,8 @@ public class XboxController extends SubsystemBase {
      */
     public XboxController(int port) {
         xb = new edu.wpi.first.wpilibj.XboxController(port);
-        joystickDeadzones.put(Hand.kLeft, 0.05);
-        joystickDeadzones.put(Hand.kRight, 0.05);
+        joystickDeadzones.put(Hand.kLeft, 0.1);
+        joystickDeadzones.put(Hand.kRight, 0.1);
     }
 
     /**
@@ -109,11 +109,9 @@ public class XboxController extends SubsystemBase {
      * Sets the deadzone for the joysticks, or the minimum counted input.
      * 
      * @param hand     Which hand side to set the deadzone of.
-     * @param deadzone The new deadzone for the joysticks.
-     * @return The old deadzone.
+     * @param deadzone The new deadzone for the joysticks. (0, 1)
      */
-    public double setJoystickDeadzone(Hand hand, double deadzone) {
-        double oldDeadzone = joystickDeadzones.get(hand);
+    public void setJoystickDeadzone(Hand hand, double deadzone) {
         double newDeadzone;
         if (deadzone < 0) {
             newDeadzone = 0;
@@ -123,17 +121,14 @@ public class XboxController extends SubsystemBase {
             newDeadzone = deadzone;
         }
         joystickDeadzones.put(hand, newDeadzone);
-        return oldDeadzone;
     }
 
     /**
      * Sets the deadzone for the triggers, or the minimum counted input.
      * 
-     * @param deadzone The new deadzone for the triggers.
-     * @return The old deadzone.
+     * @param deadzone The new deadzone for the triggers. (0, 1)
      */
-    public double setTriggerDeadzone(double deadzone) {
-        double oldDeadzone = triggerDeadzone;
+    public void setTriggerDeadzone(double deadzone) {
         if (deadzone < 0) {
             triggerDeadzone = 0;
         } else if (deadzone > 1) {
@@ -141,9 +136,13 @@ public class XboxController extends SubsystemBase {
         } else {
             triggerDeadzone = deadzone;
         }
-        return oldDeadzone;
     }
 
+    /**
+     * Rumble the Xbox controller at the given intensity.
+     * 
+     * @param intensity The rumble intensity. [0, 1]
+     */
     public void rumble(double intensity) {
         xb.setRumble(RumbleType.kLeftRumble, intensity);
         xb.setRumble(RumbleType.kRightRumble, intensity);
