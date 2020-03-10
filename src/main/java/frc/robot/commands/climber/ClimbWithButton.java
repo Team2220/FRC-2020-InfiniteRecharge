@@ -29,10 +29,10 @@ public class ClimbWithButton extends CommandBase {
 
         switch (position) {
         case EXTENDED:
-            climber.set(0.5);
+            climber.setPower(0.5);
             break;
         case RETRACTED:
-            climber.set(-0.5);
+            climber.setPower(-0.5);
             break;
 
         }
@@ -42,7 +42,7 @@ public class ClimbWithButton extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         super.end(interrupted);
-        climber.set(0);
+        climber.setPower(0);
     }
 
 }
