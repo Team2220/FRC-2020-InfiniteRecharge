@@ -68,14 +68,12 @@ public class TwilightHorse extends SubsystemBase {
         leftFollower.restoreFactoryDefaults();
         rightLeader.restoreFactoryDefaults();
         rightFollower.restoreFactoryDefaults();
-
       
         // Current limit drive motors at 40 amps
         leftLeader.setSmartCurrentLimit(40);
         leftFollower.setSmartCurrentLimit(40);
         rightLeader.setSmartCurrentLimit(40);
         rightFollower.setSmartCurrentLimit(40);
-
 
         // Initialize the drive motor encoders
         leftEncoder = leftLeader.getEncoder();
@@ -87,9 +85,11 @@ public class TwilightHorse extends SubsystemBase {
         // Set drivetrain ramp rate
         setOpenLoopRampRate(DrivetrainConstants.RAMP_RATE);
         
-        // 
+        // Set drivetrain inversion
         leftLeader.setInverted(DrivetrainConstants.LEFT_LEADER_INVERT);
+        leftFollower.setInverted(DrivetrainConstants.LEFT_FOLLOWER_INVERT); // TODO verify
         rightLeader.setInverted(DrivetrainConstants.RIGHT_LEADER_INVERT);
+        rightFollower.setInverted(DrivetrainConstants.RIGHT_FOLLOWER_INVERT); // TODO verify
 
         // Follow leader motors
         leftFollower.follow(leftLeader);
