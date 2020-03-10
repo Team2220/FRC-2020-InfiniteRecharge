@@ -68,6 +68,12 @@ public class TwilightHorse extends SubsystemBase {
         leftFollower.restoreFactoryDefaults();
         rightLeader.restoreFactoryDefaults();
         rightFollower.restoreFactoryDefaults();
+      
+        // Current limit drive motors at 40 amps
+        leftLeader.setSmartCurrentLimit(40);
+        leftFollower.setSmartCurrentLimit(40);
+        rightLeader.setSmartCurrentLimit(40);
+        rightFollower.setSmartCurrentLimit(40);
 
       
         //Limits current to 40 Amps to prevent motor burnout
@@ -82,14 +88,16 @@ public class TwilightHorse extends SubsystemBase {
         rightEncoder = rightLeader.getEncoder();
 
         // Set drivetrain idle mode
-        setIdleBehavior(DrivetrainConstants.idleBehavior);
+        setIdleBehavior(DrivetrainConstants.IDLE_BEHAVIOR);
 
         // Set drivetrain ramp rate
         setOpenLoopRampRate(DrivetrainConstants.RAMP_RATE);
         
-        //Inversions for directionality
-        leftLeader.setInverted(true);
-        rightLeader.setInverted(true);
+        // Set drivetrain inversion
+        leftLeader.setInverted(DrivetrainConstants.LEFT_LEADER_INVERT);
+        leftFollower.setInverted(DrivetrainConstants.LEFT_FOLLOWER_INVERT); // TODO verify
+        rightLeader.setInverted(DrivetrainConstants.RIGHT_LEADER_INVERT);
+        rightFollower.setInverted(DrivetrainConstants.RIGHT_FOLLOWER_INVERT); // TODO verify
 
         // Follow leader motors
         leftFollower.follow(leftLeader);
@@ -99,7 +107,7 @@ public class TwilightHorse extends SubsystemBase {
         drive = new DifferentialDrive(leftLeader, rightLeader);
 
         // Set default command to XboxDrive
-        setDefaultCommand(new XboxDrive(this)); // TODO make sure this doesn't break anything
+        setDefaultCommand(new XboxDrive(this));
     }
 
     /**
@@ -111,9 +119,6 @@ public class TwilightHorse extends SubsystemBase {
         double leftMeters = leftEncoder.getPosition() * DrivetrainConstants.ENC_COUNTS_PER_METER;
         double rightMeters = rightEncoder.getPosition() * DrivetrainConstants.ENC_COUNTS_PER_METER;
         odometry.update(Rotation2d.fromDegrees(navX.getAngle()), leftMeters, rightMeters);
-
-        // Keep drivetrain in default idle mode
-        setIdleBehavior(DrivetrainConstants.idleBehavior);
     }
 
     /**

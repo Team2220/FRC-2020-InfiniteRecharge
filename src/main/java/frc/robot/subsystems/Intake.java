@@ -24,6 +24,8 @@ public class Intake extends SubsystemBase {
   private DoubleSolenoid solenoid = new DoubleSolenoid(Constants.IntakeConstants.SOLENOID_FORWARD,
       Constants.IntakeConstants.SOLENOID_REVERSE);
 
+  private static Intake instance;
+
   public Intake() {
 
     setDefaultCommand(new IntakeXbox(this));
@@ -36,6 +38,18 @@ public class Intake extends SubsystemBase {
   @Override
   public void periodic() {
 
+  }
+
+  /**
+     * Singleton instance getter method.
+     * 
+     * @return Returns the singleton object for the intake.
+     */
+    public static Intake getInstance() {
+      if (instance == null) {
+          instance = new Intake();
+      }
+      return instance;
   }
 
   public void setPower(double demand) {
@@ -52,5 +66,4 @@ public class Intake extends SubsystemBase {
       break;
     }
   }
-
 }

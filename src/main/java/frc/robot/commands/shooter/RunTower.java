@@ -4,27 +4,27 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
 /**
- * ShootWithVelocity
+ * RunTower
  */
-public class ShootWithVelocity extends CommandBase {
+public class RunTower extends CommandBase {
 
     private final Shooter shooter;
-    private final double velocity;
+    private final double power;
 
-    public ShootWithVelocity(double velocity, Shooter shooter) {
-        this.velocity = velocity;
+    public RunTower(double power, Shooter shooter) {
+        this.power = power;
         this.shooter = shooter;
         addRequirements(shooter);
-    }   
+    }
 
     @Override
     public void initialize() {
-        shooter.setFlywheelVelocity(velocity);
+        shooter.setTowerPower(power);
     }
 
     @Override
     public void end(boolean interrupted) {
         super.end(interrupted);
-        shooter.setFlywheelPower(0);
+        shooter.setTowerPower(0);
     }
 }
