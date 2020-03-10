@@ -32,17 +32,19 @@ public class Shooter extends SubsystemBase {
     // private static final int MAX_VEL = 10500;
     // private static final int MAX_ACCEL = 350;
 
+    private static Shooter instance;
+
     TalonFX leftFalcon, rightFalcon;
     TalonSRX frontColumnTalonSRX, backColumnTalonSRX;
 
     ShuffleboardTab shooterTab = Shuffleboard.getTab("shooter");
 
-    public Shooter() {
+    private Shooter() {
 
         leftFalcon = new TalonFX(ShooterConstants.LEFT_FALCON);
         rightFalcon = new TalonFX(ShooterConstants.RIGHT_FALCON);
-        frontColumnTalonSRX = new TalonSRX(ShooterConstants.FRONT_COLUMN);
-        backColumnTalonSRX = new TalonSRX(ShooterConstants.BACK_COLUMN);
+        frontColumnTalonSRX = new TalonSRX(ShooterConstants.FRONT_TOWER);
+        backColumnTalonSRX = new TalonSRX(ShooterConstants.BACK_TOWER);
 
         leftFalcon.configFactoryDefault();
         rightFalcon.configFactoryDefault();
@@ -86,6 +88,18 @@ public class Shooter extends SubsystemBase {
         rightFalcon.configVoltageCompSaturation(9);
 
         setDefaultCommand(new ShootWithJoystick(this));
+    }
+
+    /**
+     * Singleton instance getter method.
+     * 
+     * @return Returns the singleton object for the shooter.
+     */
+    public static Shooter getInstance() {
+        if (instance == null) {
+            instance = new Shooter();
+        }
+        return instance;
     }
 
     public void setPower(double speed) {

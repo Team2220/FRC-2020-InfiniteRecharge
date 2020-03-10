@@ -14,16 +14,30 @@ public class Climber extends SubsystemBase {
     private TalonFX rightTalon = new TalonFX(ClimberConstants.RIGHT_FALCON);
     private TalonFX leftTalon = new TalonFX(ClimberConstants.LEFT_FALCON);
 
-    public Climber() {
+    private static Climber instance;
 
+    private Climber() {
         rightTalon.follow(leftTalon);
-
     }
 
-    public void set(double speed) {
-
-        leftTalon.set(ControlMode.PercentOutput, speed);
-
+    /**
+     * Singleton instance getter method.
+     * 
+     * @return Returns the singleton object for the climber.
+     */
+    public static Climber getInstance() {
+        if (instance == null) {
+            instance = new Climber();
+        }
+        return instance;
     }
 
+    /**
+     * Set the power of the climber motors. Uses percent output.
+     * 
+     * @param demand The power demand to set the climber motors to.
+     */
+    public void setPower(double demand) {
+        leftTalon.set(ControlMode.PercentOutput, demand);
+    }
 }
