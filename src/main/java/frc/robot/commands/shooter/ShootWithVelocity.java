@@ -1,6 +1,7 @@
 package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.Shooter;
 
 /**
@@ -21,15 +22,14 @@ public class ShootWithVelocity extends CommandBase {
     public ShootWithVelocity(double velocity, Shooter shooter) {
         this.velocity = velocity;
         this.shooter = shooter;
-        addRequirements(shooter);
+        // addRequirements(shooter);
     }
 
     /**
-     * Runs on command initialization.
+     * Instant command execution
      */
     @Override
     public void initialize() {
-        // Set the shooter subsystem to spin the flywheel at the specified velocity
         shooter.setFlywheelVelocity(velocity);
     }
 

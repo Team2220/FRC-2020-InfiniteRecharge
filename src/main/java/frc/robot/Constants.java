@@ -117,12 +117,12 @@ public final class Constants {
         public static final double kP = 0.1;
         public static final double kI = 0;
         public static final double kD = 2.5;
-        public static final double kF = 0.0692;
+        public static final double kF = 0.0692;//0.0692;
 
         // Shooter flywheel shot velocity
-        public static final int SHOT_VELOCITY = 13490;
+        public static final int SHOT_VELOCITY = 13490 - 535;
 
         // Tower motor power
-        public static final double TOWER_POWER = 0.7; // TODO test
+        public static final double TOWER_POWER = 0.6; // TODO test
     }
 }

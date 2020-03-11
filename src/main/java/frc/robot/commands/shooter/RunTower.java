@@ -1,6 +1,7 @@
 package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.Shooter;
 
 /**
@@ -22,11 +23,11 @@ public class RunTower extends CommandBase {
     public RunTower(double power, Shooter shooter) {
         this.power = power;
         this.shooter = shooter;
-        addRequirements(shooter);
+        // addRequirements(shooter);
     }
 
     /**
-     * Runs on command initialization.
+     * Instant command execution.
      */
     @Override
     public void initialize() {

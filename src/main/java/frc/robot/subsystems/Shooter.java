@@ -4,6 +4,9 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
@@ -21,6 +24,9 @@ public class Shooter extends SubsystemBase {
 
     // Singleton subsystem instance
     private static Shooter instance;
+
+    ShuffleboardTab t = Shuffleboard.getTab("shooter");
+    Object o = t.addNumber("velocity", () -> (leftFalcon.getSelectedSensorVelocity()));
 
     /**
      * Private Shooter subsystem. Handles initilization and configuration of all
@@ -89,6 +95,14 @@ public class Shooter extends SubsystemBase {
         leftFalcon.config_kP(0, kI);
         leftFalcon.config_kP(0, kD);
         leftFalcon.config_kP(0, kF);
+    }
+
+    @Override
+    public void periodic() {
+        leftFalcon.config_kP(0, 0.1);
+        leftFalcon.config_kI(0, 0);
+        leftFalcon.config_kD(0, 2.5);
+        leftFalcon.config_kF(0, 0.0692);
     }
 
     /**

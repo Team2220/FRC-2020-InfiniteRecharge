@@ -6,6 +6,12 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.TwilightHorse;
 import frc.robot.util.xbox.XboxController;
+import frc.robot.util.xbox.XboxController.Button;
+import frc.robot.util.xbox.XboxController.Dpad;
+import frc.robot.Constants.ShooterConstants;
+import frc.robot.commands.shooter.RunTower;
+import frc.robot.commands.shooter.ShootInventory;
+import frc.robot.commands.shooter.ShootWithVelocity;
 import frc.robot.shuffleboard.DebugTab;
 import com.revrobotics.CANSparkMax.IdleMode;
 
@@ -32,8 +38,8 @@ public class RobotContainer {
   private final XboxController driverController = new XboxController(0);
   private final XboxController armManagement = new XboxController(1);
 
-  // Shuffleboard
-  private final DebugTab debugTab = new DebugTab(driverController);
+  // Shuffleboard TODO causes errors
+  // private final DebugTab debugTab = new DebugTab(driverController);
 
   // Singleton constructor
   private RobotContainer() {
@@ -94,6 +100,10 @@ public class RobotContainer {
    */
   private void setBinds() {
     // No official binds have been set yet. Keep them out of master.
+    armManagement.getDpad(Dpad.UP).whileHeld(new RunTower(ShooterConstants.TOWER_POWER, shooter));
+    armManagement.getDpad(Dpad.DOWN).whileHeld(new RunTower(-ShooterConstants.TOWER_POWER, shooter));
+    armManagement.getButton(Button.X).whileHeld(new ShootWithVelocity(ShooterConstants.SHOT_VELOCITY, shooter));
+    armManagement.getButton(Button.B).whenPressed(new ShootInventory(ShooterConstants.SHOT_VELOCITY, 3, shooter, hopper));
   }
 
   /**
@@ -101,7 +111,9 @@ public class RobotContainer {
    */
   public void disabledInit() {
 
-    // Coast drivetrain motors for easier manual movement
-    drivetrain.setIdleBehavior(IdleMode.kCoast);
+    // // Coast drivetrain motors for easier manual movement
+    // if (drivetrain != null) {
+    //   drivetrain.setIdleBehavior(IdleMode.kCoast);
+    // }
   }
 }
