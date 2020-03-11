@@ -1,33 +1,128 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 
 /**
- * The Constants class provides a convenient place for teams to hold robot-wide
- * numerical or boolean constants. This class should not be used for any other
- * purpose. All constants should be declared globally (i.e. public static). Do
- * not put anything functional in this class.
- *
- * <p>
- * It is advised to statically import this class (or one of its inner classes)
- * wherever the constants are needed, to reduce verbosity.
+ * Centralized location for all constants. Following new WPI convention of
+ * making inner static classes for each subsystem. CAN IDs should go inside
+ * their respective inner class.
+ * 
+ * @author 2220
  */
 public final class Constants {
 
+    public final class ClimberConstants {
+
+        // Climber motor controller IDs
+        public static final int RIGHT_FALCON = 9;
+        public static final int LEFT_FALCON = 10;
+    }
+
+    /**
+     * Constants associated with the drivetrain subsytem.
+     */
+    public static final class DrivetrainConstants {
+
+        // Drive motor controller CAN ids TODO need to be actually mapped
+        public static final int LEFT_LEADER = 1;
+        public static final int LEFT_FOLLOWER = 3;
+        public static final int RIGHT_LEADER = 4;
+        public static final int RIGHT_FOLLOWER = 2;
+
+        public static final boolean LEFT_LEADER_INVERT = true;
+        public static final boolean LEFT_FOLLOWER_INVERT = false;
+        public static final boolean RIGHT_LEADER_INVERT = true;
+        public static final boolean RIGHT_FOLLOWER_INVERT = false;
+
+        // Drivetrain idle behavior while driving
+        public static final IdleMode IDLE_BEHAVIOR = IdleMode.kCoast; // TODO see if brake or coast is better for
+                                                                      // driving
+
+        // Drivetrain open loop ramp rate in seconds
+        public static final double RAMP_RATE = 1; // TODO much testing needs to be done here
+
+        // NEOs have 1 encoder count per revolution
+        // Multiplied by 6 inch wheels
+        // Multiplied by PI for diameter
+        // Multiplied by 0.0254 for meters
+
+        public static final double ENC_COUNTS_PER_METER = 6 * Math.PI * 0.0254;
+
+        // Drivetrain PIDF values TODO need to actually be characterized
+        public static double kP = 0;
+        public static double kI = 0;
+        public static double kD = 0;
+        public static double kF = 0;
+    }
+
+    /**
+     * Constants associated with the Hopper subsytem.
+     */
+    public final class HopperConstants {
+
+        // Hopper motor controller IDs
+        public static final int RIGHT_TALON = 4;
+        public static final int LEFT_TALON = 2;
+    }
+
+    /**
+     * Constants associated with the Intake subsytem.
+     */
+    public final class IntakeConstants {
+
+        // Intake motor controller ID
+        public static final int TALON = 5;
+
+        // Intake deploy solenoid IDs
+        public static final int SOLENOID_FORWARD = 6;
+        public static final int SOLENOID_REVERSE = 7;
+    }
+
+    /**
+     * Constants associated with the Shooter subsystem.
+     */
     public static final class ShooterConstants {
 
-        public static final int LEFT_FALCON = 1;
-        public static final int RIGHT_FALCON = 2;
+        // Shooter flywheel motor controller IDs
+        public static final int LEFT_FALCON = 7;
+        public static final int RIGHT_FALCON = 8;
 
-        public static final double RAMP_RATE = 1.5;
+        // Shooter flywheel motor directions
+        public static final TalonFXInvertType LEFT_FALCON_DIRECTION = TalonFXInvertType.Clockwise;
+        public static final TalonFXInvertType RIGHT_FALCON_DIRECTION = TalonFXInvertType.CounterClockwise;
 
-        public static final NeutralMode IDLE_BEHAVIOR = NeutralMode.Coast;
+        // Tower motor controller IDs
+        public static final int FRONT_TOWER = 3;
+        public static final int BACK_TOWER = 6;
+
+        // Tower motor inversions
+        public static final boolean FRONT_TOWER_INVERT = false;
+        public static final boolean BACK_TOWER_INVERT = false;
+
+        // Shooter flywheel idle behavior
+        public static final NeutralMode FLYWHEEL_IDLE_BEHAVIOR = NeutralMode.Coast;
+
+        // Tower idle behavior
+        public static final NeutralMode TOWER_IDLE_BEHAVIOR = NeutralMode.Brake;
+
+        // Shooter voltage compensation saturation value
+        public static final double VOLTAGE_SATURATION = 9;
+
+        // Shooter flywheel ramp rate
+        public static final double RAMP_RATE = 0.5; // TODO test lowest acceptable ramp rate is for shooter
+
+        // Shooter flywheel PIDF contants
+        public static final double kP = 0.1;
+        public static final double kI = 0;
+        public static final double kD = 2.5;
+        public static final double kF = 0.0692;
+
+        // Shooter flywheel shot velocity
+        public static final int SHOT_VELOCITY = 13490;
+
+        // Tower motor power
+        public static final double TOWER_POWER = 0.7; // TODO test
     }
 }

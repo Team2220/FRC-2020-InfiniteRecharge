@@ -1,43 +1,115 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Hopper;
+import frc.robot.subsystems.TwilightHorse;
+import frc.robot.subsystems.Intake.Position;
+import frc.robot.util.xbox.XboxController;
+import frc.robot.util.xbox.XboxController.Button;
+import frc.robot.commands.intake.IntakeSetPosition;
+import frc.robot.commands.shooter.ShootWithVelocity;
+import frc.robot.shuffleboard.DebugTab;
+
+import com.revrobotics.CANSparkMax.IdleMode;
+
+import frc.robot.commands.climber.ClimbWithButton;
+import frc.robot.commands.hopper.HopperWithButton;
 
 /**
- * This class is where the bulk of the robot should be declared. Since
- * Command-based is a "declarative" paradigm, very little robot logic should
- * actually be handled in the {@link Robot} periodic methods (other than the
- * scheduler calls). Instead, the structure of the robot (including subsystems,
- * commands, and button mappings) should be declared here.
+ * Robot Container is a singleton class where all the subsystems are
+ * centralized. This class also handles controller binding; a replacement for
+ * OI.
+ * 
+ * @author 2220
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here.
-  Shooter shooter;
 
-  /**
-   * The container for the robot. Contains subsystems, OI devices, and commands.
-   */
-  public RobotContainer() {
-    // Configure the button bindings
-    shooter = new Shooter();
+  // Singleton instance
+  private static RobotContainer instance;
 
-    configureButtonBindings();
+  // Robot subsystem members
+  private Climber climber;
+  private TwilightHorse drivetrain;
+  private Hopper hopper;
+  private Intake intake;
+  private Shooter shooter;
+
+  // Driver controllers
+  private final XboxController driverController = new XboxController(0);
+  private final XboxController armManagement = new XboxController(1);
+
+  // Shuffleboard
+  private final DebugTab debugTab = new DebugTab(driverController);
+
+  // Singleton constructor
+  private RobotContainer() {
+    /**
+     * Checks that this class is not initialized until the robot is on, or else
+     * subsystems and commands cannot be properly initialized. The following if
+     * throws a runtime exception if the instance exists before the robot is turned
+     * on.
+     */
+    if (!Robot.isReal()) {
+      throw new RuntimeException("Error: Attempting to initialize robot code before the robot is on");
+    }
+
+    // Initialize robot subsytems
+    climber = Climber.getInstance();
+    drivetrain = TwilightHorse.getInstance();
+    hopper = Hopper.getInstance();
+    intake = Intake.getInstance();
+    shooter = Shooter.getInstance();
+
+    // Must happen last in constructor
+    setBinds();
   }
 
   /**
-   * Use this method to define your button->command mappings. Buttons can be
-   * created by instantiating a {@link GenericHID} or one of its subclasses
-   * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
-   * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   * Singleton instance getter method.
+   * 
+   * @return Returns the singleton object for the Robot Container.
    */
-  private void configureButtonBindings() {
+  public static RobotContainer getInstance() {
+    if (instance == null) {
+      instance = new RobotContainer();
+    }
+    return instance;
+  }
+
+  /**
+   * Getter for the driver controller.
+   * 
+   * @return The driver controller.
+   */
+  public static XboxController getDriverController() {
+    return getInstance().driverController;
+  }
+
+  /**
+   * Getter for the manipulator controller. "Arm management."
+   * 
+   * @return The manipulator controller.
+   */
+  public static XboxController getManipulatorController() {
+    return getInstance().armManagement;
+  }
+
+  /**
+   * Nest all control binds inside this method. Takes place of previous year's OI
+   * class.
+   */
+  private void setBinds() {
+    // No official binds have been set yet. Keep them out of master.
+  }
+
+  /**
+   * Anything that subsytems need to do when the robot becomes disabled.
+   */
+  public void disabledInit() {
+
+    // Coast drivetrain motors for easier manual movement
+    drivetrain.setIdleBehavior(IdleMode.kCoast);
   }
 }
