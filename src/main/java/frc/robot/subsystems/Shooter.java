@@ -152,4 +152,12 @@ public class Shooter extends SubsystemBase {
     public void setTowerPower(double demand) {
         frontTower.set(ControlMode.PercentOutput, demand);
     }
+
+    public enum ShooterSystemState {
+        STILL, SPINNING_UNREADY, SPINNING_READY
+    }
+
+    public enum ShooterDesiredState {
+        IDLE, SHOOT
+    }
 }
