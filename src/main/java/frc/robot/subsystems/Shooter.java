@@ -104,6 +104,15 @@ public class Shooter extends SubsystemBase {
     }
 
     /**
+     * Getter for the flywheel velocity.
+     * 
+     * @return The flywheel's velocity in native sensor units per 100ms.
+     */
+    public int getFlywheelVelocity() {
+        return leftFalcon.getSelectedSensorVelocity();
+    }
+
+    /**
      * Sets the shooter flywheel power. Uses percent output.
      * 
      * @param demand The power demand to set the flywheel motors to.

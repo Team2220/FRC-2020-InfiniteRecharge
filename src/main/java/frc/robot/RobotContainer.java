@@ -5,17 +5,9 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.TwilightHorse;
-import frc.robot.subsystems.Intake.Position;
 import frc.robot.util.xbox.XboxController;
-import frc.robot.util.xbox.XboxController.Button;
-import frc.robot.commands.intake.IntakeSetPosition;
-import frc.robot.commands.shooter.ShootWithVelocity;
 import frc.robot.shuffleboard.DebugTab;
-
 import com.revrobotics.CANSparkMax.IdleMode;
-
-import frc.robot.commands.climber.ClimbWithButton;
-import frc.robot.commands.hopper.HopperWithButton;
 
 /**
  * Robot Container is a singleton class where all the subsystems are
