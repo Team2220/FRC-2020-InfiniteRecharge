@@ -7,9 +7,11 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.ShooterConstants;
+import frc.robot.Constants.TowerConstants;
 import frc.robot.commands.hopper.RunHopper;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Tower;
 import frc.robot.util.xbox.RumbleForTime;
 
 /**
@@ -29,8 +31,10 @@ public class ShootInventory extends ParallelRaceGroup {
      * @param velocity  The velocity to spin the shooter flywheel at.
      * @param shootTime The amount of time to shoot for once spun up.
      * @param shooter   The passed shooter subsystem.
+     * @param hopper    The passed hopper subsystem.
+     * @param tower     The passed tower subsystem.
      */
-    public ShootInventory(double velocity, double shootTime, Shooter shooter, Hopper hopper) {
+    public ShootInventory(double velocity, double shootTime, Shooter shooter, Hopper hopper, Tower tower) {
         // Add all of the commands to the command group
         addCommands(
             new ShootWithVelocity(velocity, shooter),
@@ -41,7 +45,7 @@ public class ShootInventory extends ParallelRaceGroup {
                 // }),
                 new WaitCommand(0.5),
                 new ParallelRaceGroup(
-                    new RunTower(ShooterConstants.TOWER_POWER, shooter),
+                    new RunTower(TowerConstants.TOWER_POWER, tower),
                     new WaitCommand(shootTime)
                 )
             )

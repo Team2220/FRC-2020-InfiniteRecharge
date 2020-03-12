@@ -93,19 +93,8 @@ public final class Constants {
         public static final TalonFXInvertType LEFT_FALCON_DIRECTION = TalonFXInvertType.Clockwise;
         public static final TalonFXInvertType RIGHT_FALCON_DIRECTION = TalonFXInvertType.CounterClockwise;
 
-        // Tower motor controller IDs
-        public static final int FRONT_TOWER = 3;
-        public static final int BACK_TOWER = 6;
-
-        // Tower motor inversions
-        public static final boolean FRONT_TOWER_INVERT = false;
-        public static final boolean BACK_TOWER_INVERT = false;
-
         // Shooter flywheel idle behavior
         public static final NeutralMode FLYWHEEL_IDLE_BEHAVIOR = NeutralMode.Coast;
-
-        // Tower idle behavior
-        public static final NeutralMode TOWER_IDLE_BEHAVIOR = NeutralMode.Brake;
 
         // Shooter voltage compensation saturation value
         public static final double VOLTAGE_SATURATION = 9;
@@ -121,6 +110,23 @@ public final class Constants {
 
         // Shooter flywheel shot velocity
         public static final int SHOT_VELOCITY = 13490 - 535;
+    }
+
+    /**
+     * Constants associated with the Tower subsystem.
+     */
+    public static final class TowerConstants {
+
+        // Tower motor controller IDs
+        public static final int FRONT_TOWER = 3;
+        public static final int BACK_TOWER = 6;
+
+        // Tower motor inversions
+        public static final boolean FRONT_TOWER_INVERT = false;
+        public static final boolean BACK_TOWER_INVERT = false;
+
+        // Tower idle behavior
+        public static final NeutralMode TOWER_IDLE_BEHAVIOR = NeutralMode.Brake;
 
         // Tower motor power
         public static final double TOWER_POWER = 0.6; // TODO test

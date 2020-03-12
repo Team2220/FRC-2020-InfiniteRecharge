@@ -1,8 +1,7 @@
 package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Tower;
 
 /**
  * Very simple command to run the tower motors at a specified percent output, or
@@ -11,18 +10,18 @@ import frc.robot.subsystems.Shooter;
 public class RunTower extends CommandBase {
 
     // Instance members
-    private final Shooter shooter;
+    private final Tower tower;
     private final double power;
 
     /**
      * Command constructor.
      * 
      * @param power   The percent output to run the tower motors at.
-     * @param shooter The passed shooter subsytem.
+     * @param tower The passed shooter subsytem.
      */
-    public RunTower(double power, Shooter shooter) {
+    public RunTower(double power, Tower tower) {
         this.power = power;
-        this.shooter = shooter;
+        this.tower = tower;
         // addRequirements(shooter);
     }
 
@@ -32,7 +31,7 @@ public class RunTower extends CommandBase {
     @Override
     public void initialize() {
         // Sets the tower to the specified power
-        shooter.setTowerPower(power);
+        tower.setTowerPower(power);
     }
 
     /**
@@ -42,6 +41,6 @@ public class RunTower extends CommandBase {
     public void end(boolean interrupted) {
         super.end(interrupted);
         // Sets the tower to stop moving
-        shooter.setTowerPower(0);
+        tower.setTowerPower(0);
     }
 }
