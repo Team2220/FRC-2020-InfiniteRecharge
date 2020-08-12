@@ -20,8 +20,8 @@ public class Hopper extends SubsystemBase {
     rightTalon.configFactoryDefault();
     leftTalon.configContinuousCurrentLimit(7);
     rightTalon.configContinuousCurrentLimit(7);
-    rightTalon.follow(leftTalon);
-    rightTalon.setInverted(InvertType.OpposeMaster);
+    leftTalon.setInverted(false);
+    rightTalon.setInverted(true);
 
   }
 
@@ -43,8 +43,7 @@ public class Hopper extends SubsystemBase {
   }
 
   public void setPower(double demand) {
-
-    leftTalon.set(ControlMode.PercentOutput, demand);
-
+    leftTalon.set(ControlMode.PercentOutput, demand * 0.9);
+    rightTalon.set(ControlMode.PercentOutput, demand * 1.1);
   }
 }

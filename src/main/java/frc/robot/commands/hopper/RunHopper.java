@@ -6,13 +6,13 @@ import frc.robot.subsystems.Hopper;
 /**
  * HopperWithJoystick
  */
-public class HopperWithButton extends CommandBase {
+public class RunHopper extends CommandBase {
 
     private final Hopper hopper;
 
     private static final double HOPPER_POWER = 0.5;
 
-    public HopperWithButton(Hopper hopper) {
+    public RunHopper(Hopper hopper) {
         this.hopper = hopper;
         addRequirements(hopper);
     }

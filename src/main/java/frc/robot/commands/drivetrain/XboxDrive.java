@@ -85,7 +85,7 @@ public class XboxDrive extends CommandBase {
         final double deadzone = driverController.getDeadzone(hand);
 
         // Exponent to curve joystick value TODO test out what curve (if any) is best
-        final double exp = 1 + deadzone;
+        final double exp = 1; // 1 + deadzone
 
         // Sort of the slope, used several times in function to limit and stretch
         final double slope = 1. / (1 - deadzone);
