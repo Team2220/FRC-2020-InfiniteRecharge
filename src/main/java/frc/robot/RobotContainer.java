@@ -102,6 +102,7 @@ public class RobotContainer {
    */
   private void setBinds() {
     // No official binds have been set yet. Keep them out of master.
+    armManagement.getButton(Button.A).whileHeld(new HopperWithButton(hopper));
   }
 
   /**
