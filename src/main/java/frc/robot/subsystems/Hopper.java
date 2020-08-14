@@ -5,45 +5,53 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.HopperConstants;
 
 public class Hopper extends SubsystemBase {
 
-  private TalonSRX leftTalon = new TalonSRX(Constants.HopperConstants.LEFT_TALON);
-  private TalonSRX rightTalon = new TalonSRX(Constants.HopperConstants.RIGHT_TALON);
+  private TalonSRX leftHopper, rightHopper;
+  private TalonSRX frontTower, backTower;
 
-  private static Hopper instance;
+  public Hopper() {
+    leftHopper = new TalonSRX(HopperConstants.LEFT_HOPPER);
+    rightHopper = new TalonSRX(HopperConstants.RIGHT_HOPPER);
+    frontTower = new TalonSRX(HopperConstants.FRONT_COLUMN);
+    backTower = new TalonSRX(HopperConstants.BACK_COLUMN);
 
-  private Hopper() {
+    leftHopper.configFactoryDefault();
+    rightHopper.configFactoryDefault();
+    frontTower.configFactoryDefault();
+    backTower.configFactoryDefault();
 
-    leftTalon.configFactoryDefault();
-    rightTalon.configFactoryDefault();
-    leftTalon.configContinuousCurrentLimit(7);
-    rightTalon.configContinuousCurrentLimit(7);
-    leftTalon.setInverted(false);
-    rightTalon.setInverted(true);
+    rightHopper.follow(leftHopper);
+    backTower.follow(frontTower);
 
+    leftHopper.setInverted(InvertType.None);
+    rightHopper.setInverted(InvertType.OpposeMaster);
+
+    frontTower.setInverted(InvertType.InvertMotorOutput);
+    backTower.setInverted(InvertType.InvertMotorOutput);
+
+    leftHopper.configOpenloopRamp(HopperConstants.RAMP_RATE);
+    rightHopper.configOpenloopRamp(HopperConstants.RAMP_RATE);
+    frontTower.configOpenloopRamp(HopperConstants.RAMP_RATE);
+    backTower.configOpenloopRamp(HopperConstants.RAMP_RATE);
+
+    leftHopper.setNeutralMode(HopperConstants.IDLE_BEHAVIOR);
+    rightHopper.setNeutralMode(HopperConstants.IDLE_BEHAVIOR);
+    frontTower.setNeutralMode(HopperConstants.IDLE_BEHAVIOR);
+    backTower.setNeutralMode(HopperConstants.IDLE_BEHAVIOR);
   }
 
   @Override
   public void periodic() {
-
   }
 
-  /**
-   * Singleton instance getter method.
-   * 
-   * @return Returns the singleton object for the hopper.
-   */
-  public static Hopper getInstance() {
-    if (instance == null) {
-      instance = new Hopper();
-    }
-    return instance;
+  public void setHopper(double demand) {
+    leftHopper.set(ControlMode.PercentOutput, demand);
   }
 
-  public void setPower(double demand) {
-    leftTalon.set(ControlMode.PercentOutput, demand * 0.9);
-    rightTalon.set(ControlMode.PercentOutput, demand * 1.1);
+  public void setTower(double demand) {
+    frontTower.set(ControlMode.PercentOutput, demand);
   }
 }

@@ -5,6 +5,7 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Tower;
 import frc.robot.subsystems.Hopper;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.TwilightHorse;
 import frc.robot.util.xbox.XboxController;
 import frc.robot.util.xbox.XboxController.Button;
@@ -20,6 +21,8 @@ import frc.robot.shuffleboard.DebugTab;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.intake.IntakeSetPosition;
+import frc.robot.commands.intake.RunIntake;
 
 /**
  * Robot Container is a singleton class where all the subsystems are
@@ -40,6 +43,12 @@ public class RobotContainer {
   private Intake intake;
   private Shooter shooter;
   private Tower tower;
+
+  // Mechanism subsystems
+  private final Intake intake;
+  private final Shooter shooter;
+  private final Hopper hopper;
+  private final Climber climber;
 
   // Driver controllers
   private final XboxController driverController = new XboxController(0);
@@ -63,10 +72,11 @@ public class RobotContainer {
     // Initialize robot subsytems
     climber = Climber.getInstance();
     drivetrain = TwilightHorse.getInstance();
-    hopper = Hopper.getInstance();
-    intake = Intake.getInstance();
-    shooter = Shooter.getInstance();
-    tower = Tower.getInstance();
+
+    shooter = new Shooter();
+    intake = new Intake();
+    hopper = new Hopper();
+    climber = new Climber();
 
     // Must happen last in constructor
     setBinds();
@@ -109,11 +119,14 @@ public class RobotContainer {
   private void setBinds() {
     // No official binds have been set yet. Keep them out of master.
     armManagement.getButton(Button.A).whileHeld(new RunHopper(hopper));
+     armManagement.getButton(Button.A).whileHeld(new RunIntake(intake));
     armManagement.getButton(Button.Y).whileHeld(new ShootAndDynamicFeed(shooter, tower));
     armManagement.getDpad(Dpad.UP).whileHeld(new RunTower(TowerConstants.TOWER_POWER, tower));
     armManagement.getDpad(Dpad.DOWN).whileHeld(new RunTower(-TowerConstants.TOWER_POWER, tower));
     // armManagement.getButton(Button.X).whileHeld(new ShootWithVelocity(ShooterConstants.SHOT_VELOCITY, shooter));
     // armManagement.getButton(Button.B).whenPressed(new ShootInventory(ShooterConstants.SHOT_VELOCITY, 3, shooter, hopper, tower));
+    armManagement.getButton(Button.RIGHT_BUMPER).whenPressed(new IntakeSetPosition(Position.EXTENDED, intake));
+    armManagement.getButton(Button.LEFT_BUMPER).whenPressed(new IntakeSetPosition(Position.RETRACTED, intake));
   }
 
   /**
@@ -125,5 +138,6 @@ public class RobotContainer {
     if (drivetrain != null) {
       drivetrain.setIdleBehavior(IdleMode.kCoast);
     }
+
   }
 }

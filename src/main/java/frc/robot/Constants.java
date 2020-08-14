@@ -37,11 +37,11 @@ public final class Constants {
         public static final boolean RIGHT_FOLLOWER_INVERT = false;
 
         // Drivetrain idle behavior while driving
-        public static final IdleMode IDLE_BEHAVIOR = IdleMode.kCoast; // TODO see if brake or coast is better for
+        public static final IdleMode IDLE_BEHAVIOR = IdleMode.kBrake; // TODO see if brake or coast is better for
                                                                       // driving
 
         // Drivetrain open loop ramp rate in seconds
-        public static final double RAMP_RATE = 1; // TODO much testing needs to be done here
+        public static final double RAMP_RATE = 0.25; // TODO much testing needs to be done here
 
         // NEOs have 1 encoder count per revolution
         // Multiplied by 6 inch wheels
@@ -57,16 +57,27 @@ public final class Constants {
         public static double kF = 0;
     }
 
+
     /**
      * Constants associated with the Hopper subsytem.
      */
-    public final class HopperConstants {
+    // public final class HopperConstants {
 
-        // Hopper motor controller IDs
-        public static final int RIGHT_TALON = 4;
-        public static final int LEFT_TALON = 2;
+    //     // Hopper motor controller IDs
+    //     public static final int RIGHT_TALON = 4;
+    //     public static final int LEFT_TALON = 2;
+    // }
+    public static final class HopperConstants {
+
+        public static final int LEFT_HOPPER = 64;
+        public static final int RIGHT_HOPPER = 65;
+        public static final int FRONT_COLUMN = 3;
+        public static final int BACK_COLUMN = 4;
+
+        public static final double RAMP_RATE = 0.1;
+
+        public static final NeutralMode IDLE_BEHAVIOR = NeutralMode.Brake;
     }
-
     /**
      * Constants associated with the Intake subsytem.
      */
@@ -74,10 +85,25 @@ public final class Constants {
 
         // Intake motor controller ID
         public static final int TALON = 5;
-
         // Intake deploy solenoid IDs
         public static final int SOLENOID_FORWARD = 6;
         public static final int SOLENOID_REVERSE = 7;
+    }
+   
+    public static final class ShooterConstants {
+
+        public static final int LEFT_FALCON = 1;
+        public static final int RIGHT_FALCON = 2;
+
+        public static final double RAMP_RATE = 0.75;
+
+        public static final int SHOT_VELOCITY = 600; // TODO test this for correct shot velocity
+
+        
+    }
+
+    public static final class ClimberConstants {
+
     }
 
     /**
@@ -130,5 +156,13 @@ public final class Constants {
 
         // Tower motor power
         public static final double TOWER_POWER = 0.6; // TODO test
+    }
+
+    public static final class IntakeConstants {
+
+        public static final int TALON = 25;
+        public static final int SOLENOID_FORWARD = 2;
+        public static final int SOLENOID_REVERSE = 1;
+        public static final double INTAKE_POWER = 0.7;  // TODO find the optimal intake power value
     }
 }

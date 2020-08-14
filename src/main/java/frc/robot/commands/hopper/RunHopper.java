@@ -20,13 +20,12 @@ public class RunHopper extends CommandBase {
     @Override
     public void initialize() {
         super.initialize();
-        hopper.setPower(HOPPER_POWER);
+        hopper.setHopper(HOPPER_POWER);
     }
 
     @Override
     public void end(boolean interrupted) {
         super.end(interrupted);
-        hopper.setPower(0);
+        hopper.setHopper(0);
     }
-
 }

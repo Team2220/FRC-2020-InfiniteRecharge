@@ -14,8 +14,7 @@ import frc.robot.Constants.ShooterConstants;
 
 public class Shooter extends SubsystemBase {
 
-    // Shooter flywheel falcons
-    TalonFX leftFalcon, rightFalcon;
+    private TalonFX leftFalcon, rightFalcon;
 
     // Flywheel target velocity instance variable
     private double flywheelTargetVelocity = 0;
@@ -40,8 +39,8 @@ public class Shooter extends SubsystemBase {
      * Private Shooter subsystem. Handles initilization and configuration of all
      * related motors.
      */
-    private Shooter() {
         // Shooter falcons
+    public Shooter() {
         leftFalcon = new TalonFX(ShooterConstants.LEFT_FALCON);
         rightFalcon = new TalonFX(ShooterConstants.RIGHT_FALCON);
 
@@ -140,6 +139,12 @@ public class Shooter extends SubsystemBase {
         sState = newState;
     }
 
+    public void setPower(double demand) {
+        if (Math.abs(demand) > 0.95) {
+            demand = Math.signum(demand) * 0.95;
+        }
+        leftFalcon.set(TalonFXControlMode.PercentOutput, demand);
+    }
     public void setState(ShooterDesiredState newState) {
         if (dState == newState) {
             return;
@@ -203,5 +208,8 @@ public class Shooter extends SubsystemBase {
 
     public enum ShooterDesiredState {
         IDLE, SHOOT
+    }
+    public void setVelocity(int demand) {
+        leftFalcon.set(TalonFXControlMode.Velocity, demand);
     }
 }
