@@ -9,15 +9,20 @@ import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
  * making inner static classes for each subsystem. CAN IDs should go inside
  * their respective inner class.
  * 
+ * link to the robot design sheet; the electrical tab 
+ * https://docs.google.com/spreadsheets/d/1z7qXRHAooeRAFEQf8ARzbfuT_bp6NRnh-9rDxeA0Qa4/edit#gid=15585419
+ *
  * @author 2220
  */
+
+
 public final class Constants {
 
     public final class ClimberConstants {
 
         // Climber motor controller IDs
-        public static final int RIGHT_FALCON = 9;
-        public static final int LEFT_FALCON = 10;
+        public static final int RIGHT_FALCON = 10;
+        public static final int LEFT_FALCON = 9;
     }
 
     /**
@@ -69,10 +74,10 @@ public final class Constants {
     // }
     public static final class HopperConstants {
 
-        public static final int LEFT_HOPPER = 64;
-        public static final int RIGHT_HOPPER = 65;
+        public static final int LEFT_HOPPER = 2;
+        public static final int RIGHT_HOPPER = 4;
         public static final int FRONT_COLUMN = 3;
-        public static final int BACK_COLUMN = 4;
+        public static final int BACK_COLUMN = 6;
 
         public static final double RAMP_RATE = 0.1;
 
