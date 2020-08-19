@@ -88,23 +88,12 @@ public final class Constants {
         // Intake deploy solenoid IDs
         public static final int SOLENOID_FORWARD = 6;
         public static final int SOLENOID_REVERSE = 7;
+        public static final double INTAKE_POWER = 0.7; 
     }
    
-    public static final class ShooterConstants {
+    
 
-        public static final int LEFT_FALCON = 1;
-        public static final int RIGHT_FALCON = 2;
-
-        public static final double RAMP_RATE = 0.75;
-
-        public static final int SHOT_VELOCITY = 600; // TODO test this for correct shot velocity
-
-        
-    }
-
-    public static final class ClimberConstants {
-
-    }
+    
 
     /**
      * Constants associated with the Shooter subsystem.
@@ -158,11 +147,4 @@ public final class Constants {
         public static final double TOWER_POWER = 0.6; // TODO test
     }
 
-    public static final class IntakeConstants {
-
-        public static final int TALON = 25;
-        public static final int SOLENOID_FORWARD = 2;
-        public static final int SOLENOID_REVERSE = 1;
-        public static final double INTAKE_POWER = 0.7;  // TODO find the optimal intake power value
-    }
 }

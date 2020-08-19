@@ -3,25 +3,13 @@ package frc.robot;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Tower;
 import frc.robot.subsystems.Hopper;
-import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.TwilightHorse;
 import frc.robot.subsystems.Intake.Position;
 import frc.robot.util.xbox.XboxController;
 import frc.robot.util.xbox.XboxController.Button;
-import frc.robot.util.xbox.XboxController.Dpad;
-import frc.robot.Constants.ShooterConstants;
-import frc.robot.Constants.TowerConstants;
 import frc.robot.commands.hopper.RunHopper;
-import frc.robot.commands.shooter.RunTower;
-import frc.robot.commands.shooter.ShootAndDynamicFeed;
-import frc.robot.commands.shooter.ShootInventory;
-import frc.robot.commands.shooter.ShootWithVelocity;
-import frc.robot.shuffleboard.DebugTab;
 import com.revrobotics.CANSparkMax.IdleMode;
-
-import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.intake.IntakeSetPosition;
 import frc.robot.commands.intake.RunIntake;
 
