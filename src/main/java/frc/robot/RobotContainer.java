@@ -7,6 +7,7 @@ import frc.robot.subsystems.Tower;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.TwilightHorse;
+import frc.robot.subsystems.Intake.Position;
 import frc.robot.util.xbox.XboxController;
 import frc.robot.util.xbox.XboxController.Button;
 import frc.robot.util.xbox.XboxController.Dpad;
@@ -37,12 +38,8 @@ public class RobotContainer {
   private static RobotContainer instance;
 
   // Robot subsystem members
-  private Climber climber;
-  private TwilightHorse drivetrain;
-  private Hopper hopper;
-  private Intake intake;
-  private Shooter shooter;
-  private Tower tower;
+  private final TwilightHorse drivetrain;
+  
 
   // Mechanism subsystems
   private final Intake intake;
@@ -70,7 +67,6 @@ public class RobotContainer {
     }
 
     // Initialize robot subsytems
-    climber = Climber.getInstance();
     drivetrain = TwilightHorse.getInstance();
 
     shooter = new Shooter();
@@ -120,9 +116,6 @@ public class RobotContainer {
     // No official binds have been set yet. Keep them out of master.
     armManagement.getButton(Button.A).whileHeld(new RunHopper(hopper));
      armManagement.getButton(Button.A).whileHeld(new RunIntake(intake));
-    armManagement.getButton(Button.Y).whileHeld(new ShootAndDynamicFeed(shooter, tower));
-    armManagement.getDpad(Dpad.UP).whileHeld(new RunTower(TowerConstants.TOWER_POWER, tower));
-    armManagement.getDpad(Dpad.DOWN).whileHeld(new RunTower(-TowerConstants.TOWER_POWER, tower));
     // armManagement.getButton(Button.X).whileHeld(new ShootWithVelocity(ShooterConstants.SHOT_VELOCITY, shooter));
     // armManagement.getButton(Button.B).whenPressed(new ShootInventory(ShooterConstants.SHOT_VELOCITY, 3, shooter, hopper, tower));
     armManagement.getButton(Button.RIGHT_BUMPER).whenPressed(new IntakeSetPosition(Position.EXTENDED, intake));
