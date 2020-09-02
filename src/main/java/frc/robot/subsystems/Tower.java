@@ -19,7 +19,7 @@ public class Tower extends SubsystemBase {
 
     private static Tower instance;
 
-    private Tower() {
+    public Tower() {
         // Tower talons
         frontTower = new TalonSRX(TowerConstants.FRONT_TOWER);
         backTower = new TalonSRX(TowerConstants.BACK_TOWER);
