@@ -10,6 +10,7 @@ public class RunShooter extends CommandBase{
     public RunShooter(double speed, Shooter shooter) {
         this.shooter = shooter;
         this.speed = speed;
+        addRequirements(shooter);
     }
 
     @Override
