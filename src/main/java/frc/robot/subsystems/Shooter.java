@@ -123,6 +123,7 @@ public class Shooter extends SubsystemBase {
         if (sState == newState) {
             return;
         }
+    System.out.println("Shooter.transitionSystemState("+ newState +")");
 
         switch (newState) {
         case STILL:
@@ -149,6 +150,7 @@ public class Shooter extends SubsystemBase {
         if (dState == newState) {
             return;
         }
+        System.out.println("Shooter.setState("+ newState +")");
 
         switch (newState) {
         case IDLE:
@@ -159,6 +161,7 @@ public class Shooter extends SubsystemBase {
             transitionSystemState(ShooterSystemState.SPINNING_UNREADY);
             break;
         }
+        dState = newState;
     }
 
     public ShooterSystemState getSystemState() {
@@ -209,6 +212,8 @@ public class Shooter extends SubsystemBase {
     public enum ShooterDesiredState {
         IDLE, SHOOT
     }
+    // TODO: Should this be a double
+
     public void setVelocity(int demand) {
         leftFalcon.set(TalonFXControlMode.Velocity, demand);
     }

@@ -24,6 +24,7 @@ public class ShootAndDynamicFeed extends CommandBase {
 
     @Override
     public void initialize() {
+        System.out.println("ShootAndDynamicFeed.initialize()");
         shooter.setState(ShooterDesiredState.SHOOT);
     }
 
@@ -38,8 +39,10 @@ public class ShootAndDynamicFeed extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        super.end(interrupted);
+        System.out.println("ShootAndDynamicFeed.end("+ interrupted +")");
         shooter.setState(ShooterDesiredState.IDLE);
         tower.setState(TowerState.IDLE);
+        
+
     }
 }
