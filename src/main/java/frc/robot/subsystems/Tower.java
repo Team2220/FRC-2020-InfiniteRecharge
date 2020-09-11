@@ -69,6 +69,7 @@ public class Tower extends SubsystemBase {
             setTowerPower(TowerConstants.TOWER_POWER);
             break;
         }
+        state = newState;
     }
 
     /**
