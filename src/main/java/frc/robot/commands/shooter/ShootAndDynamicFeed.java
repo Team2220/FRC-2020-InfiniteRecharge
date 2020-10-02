@@ -6,6 +6,7 @@ import frc.robot.subsystems.Tower;
 import frc.robot.subsystems.Shooter.ShooterDesiredState;
 import frc.robot.subsystems.Shooter.ShooterSystemState;
 import frc.robot.subsystems.Tower.TowerState;
+import frc.robot.util.Logger;
 
 /**
  * ShootAndDynamicFeed
@@ -24,7 +25,7 @@ public class ShootAndDynamicFeed extends CommandBase {
 
     @Override
     public void initialize() {
-        System.out.println("ShootAndDynamicFeed.initialize()");
+        Logger.log("ShootAndDynamicFeed.initialize()");
         shooter.setState(ShooterDesiredState.SHOOT);
     }
 
@@ -39,7 +40,7 @@ public class ShootAndDynamicFeed extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        System.out.println("ShootAndDynamicFeed.end("+ interrupted +")");
+        Logger.log("ShootAndDynamicFeed.end("+ interrupted +")");
         shooter.setState(ShooterDesiredState.IDLE);
         tower.setState(TowerState.IDLE);
         

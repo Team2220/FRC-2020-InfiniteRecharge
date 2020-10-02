@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
+import frc.robot.util.Logger;
 
 /**
  * Shooter
@@ -123,7 +124,7 @@ public class Shooter extends SubsystemBase {
         if (sState == newState) {
             return;
         }
-    System.out.println("Shooter.transitionSystemState("+ newState +")");
+        Logger.log("Shooter.transitionSystemState("+ newState +")");
 
         switch (newState) {
         case STILL:
@@ -150,7 +151,7 @@ public class Shooter extends SubsystemBase {
         if (dState == newState) {
             return;
         }
-        System.out.println("Shooter.setState("+ newState +")");
+        Logger.log("Shooter.setState("+ newState +")");
 
         switch (newState) {
         case IDLE:
