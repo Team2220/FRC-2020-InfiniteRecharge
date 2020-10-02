@@ -23,30 +23,30 @@ import frc.robot.commands.drivetrain.XboxDrive;
  * 
  * @author Reece
  */
-public class TwilightHorse extends SubsystemBase {
+public class DriveTrain extends SubsystemBase {
 
     // Drivetrain motor controllers
-    private CANSparkMax leftLeader, leftFollower, rightLeader, rightFollower;
+    private final CANSparkMax leftLeader, leftFollower, rightLeader, rightFollower;
 
     // navX gyro
-    private AHRS navX;
+    private final AHRS navX;
 
     // Distance sensor
     private Rev2mDistanceSensor distanceSensor;
 
     // Drive motor encoders
-    private CANEncoder leftEncoder, rightEncoder;
+    private final CANEncoder leftEncoder, rightEncoder;
 
     // Drivetrain contractor
-    private DifferentialDrive drive;
+    private final DifferentialDrive drive;
 
     // Drivetrain odometry
-    private DifferentialDriveOdometry odometry;
+    private final DifferentialDriveOdometry odometry;
 
     // Singleton subsystem instance
-    private static TwilightHorse instance;
+    private static DriveTrain instance;
 
-    private TwilightHorse() {
+    private DriveTrain() {
         // Map drive motor controllers to their CAN ids
         leftLeader = neoBuilder(DrivetrainConstants.LEFT_LEADER);
         leftFollower = neoBuilder(DrivetrainConstants.LEFT_FOLLOWER);
@@ -57,7 +57,8 @@ public class TwilightHorse extends SubsystemBase {
         navX = new AHRS();
 
         // Initialize distance sensor
-        // distanceSensor = new Rev2mDistanceSensor(Port.kOnboard, Unit.kInches, RangeProfile.kDefault);
+        // distanceSensor = new Rev2mDistanceSensor(Port.kOnboard, Unit.kInches,
+        // RangeProfile.kDefault);
         // distanceSensor.setAutomaticMode(true);
 
         // Initialize drivetrain odometer
@@ -68,20 +69,18 @@ public class TwilightHorse extends SubsystemBase {
         leftFollower.restoreFactoryDefaults();
         rightLeader.restoreFactoryDefaults();
         rightFollower.restoreFactoryDefaults();
-      
+
         // Current limit drive motors at 40 amps
         leftLeader.setSmartCurrentLimit(40);
         leftFollower.setSmartCurrentLimit(40);
         rightLeader.setSmartCurrentLimit(40);
         rightFollower.setSmartCurrentLimit(40);
 
-      
-        //Limits current to 40 Amps to prevent motor burnout
+        // Limits current to 40 Amps to prevent motor burnout
         leftLeader.setSmartCurrentLimit(40);
         leftFollower.setSmartCurrentLimit(40);
         rightLeader.setSmartCurrentLimit(40);
         rightFollower.setSmartCurrentLimit(40);
-
 
         // Initialize the drive motor encoders
         leftEncoder = leftLeader.getEncoder();
@@ -92,7 +91,7 @@ public class TwilightHorse extends SubsystemBase {
 
         // Set drivetrain ramp rate
         setOpenLoopRampRate(DrivetrainConstants.RAMP_RATE);
-        
+
         // Set drivetrain inversion
         leftLeader.setInverted(DrivetrainConstants.LEFT_LEADER_INVERT);
         leftFollower.setInverted(DrivetrainConstants.LEFT_FOLLOWER_INVERT); // TODO verify
@@ -116,8 +115,8 @@ public class TwilightHorse extends SubsystemBase {
     @Override
     public void periodic() {
         // Update odometry
-        double leftMeters = leftEncoder.getPosition() * DrivetrainConstants.ENC_COUNTS_PER_METER;
-        double rightMeters = rightEncoder.getPosition() * DrivetrainConstants.ENC_COUNTS_PER_METER;
+        final double leftMeters = leftEncoder.getPosition() * DrivetrainConstants.ENC_COUNTS_PER_METER;
+        final double rightMeters = rightEncoder.getPosition() * DrivetrainConstants.ENC_COUNTS_PER_METER;
         odometry.update(Rotation2d.fromDegrees(navX.getAngle()), leftMeters, rightMeters);
 
         // Keep drivetrain in default idle mode
@@ -129,9 +128,9 @@ public class TwilightHorse extends SubsystemBase {
      * 
      * @return Returns the singleton object for the drivetrain.
      */
-    public static TwilightHorse getInstance() {
+    public static DriveTrain getInstance() {
         if (instance == null) {
-            instance = new TwilightHorse();
+            instance = new DriveTrain();
         }
         return instance;
     }
@@ -188,7 +187,7 @@ public class TwilightHorse extends SubsystemBase {
      * @param power The forward and backward power input.
      * @param spin  The rotation power input.
      */
-    public void drive(double power, double spin) {
+    public void drive(final double power, final double spin) {
         drive.curvatureDrive(power, spin, true);
     }
 
@@ -197,7 +196,7 @@ public class TwilightHorse extends SubsystemBase {
      * 
      * @param idleBehavior The idle behavior to set to.
      */
-    public void setIdleBehavior(IdleMode idleBehavior) {
+    public void setIdleBehavior(final IdleMode idleBehavior) {
         leftLeader.setIdleMode(idleBehavior);
         leftFollower.setIdleMode(idleBehavior);
         rightLeader.setIdleMode(idleBehavior);
@@ -210,7 +209,7 @@ public class TwilightHorse extends SubsystemBase {
      * 
      * @param seconds The amount of seconds to fully accelerate from rest.
      */
-    public void setOpenLoopRampRate(double seconds) {
+    public void setOpenLoopRampRate(final double seconds) {
         leftLeader.setOpenLoopRampRate(seconds);
         leftFollower.setOpenLoopRampRate(seconds);
         rightLeader.setOpenLoopRampRate(seconds);
@@ -225,7 +224,7 @@ public class TwilightHorse extends SubsystemBase {
      * @return Constructs a spark max object, and lets me embrace my ADHD by not
      *         typing the same thing 4 times.
      */
-    private CANSparkMax neoBuilder(int channel) {
+    private CANSparkMax neoBuilder(final int channel) {
         return new CANSparkMax(channel, MotorType.kBrushless);
     }
 }

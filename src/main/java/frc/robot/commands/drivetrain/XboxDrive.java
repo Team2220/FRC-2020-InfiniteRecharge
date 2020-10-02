@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.DrivetrainConstants;
-import frc.robot.subsystems.TwilightHorse;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.util.xbox.XboxController;
 
 /**
@@ -16,14 +16,14 @@ import frc.robot.util.xbox.XboxController;
 public class XboxDrive extends CommandBase {
 
     // Drivetrain subsystem
-    private final TwilightHorse drivetrain;
+    private final DriveTrain drivetrain;
 
     /**
      * Constructor for XboxDrive command.
      * 
      * @param drivetrain Drivetrain subsystem.
      */
-    public XboxDrive(TwilightHorse drivetrain) {
+    public XboxDrive(DriveTrain drivetrain) {
         // Add drivetrain as a subsystem requirement
         addRequirements(drivetrain);
 

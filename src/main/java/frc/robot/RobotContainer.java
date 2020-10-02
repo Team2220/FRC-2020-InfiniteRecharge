@@ -5,7 +5,7 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Tower;
 import frc.robot.subsystems.Hopper;
-import frc.robot.subsystems.TwilightHorse;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake.Position;
 import frc.robot.util.xbox.XboxController;
 import frc.robot.util.xbox.XboxController.Button;
@@ -32,7 +32,7 @@ public class RobotContainer {
 
   // Robot subsystem members
   private  final Climber climber;
-  private  final TwilightHorse drivetrain;
+  private  final DriveTrain drivetrain;
   private final Hopper hopper;
   private final Intake intake;
   private final Shooter shooter;
@@ -60,7 +60,7 @@ public class RobotContainer {
     }
 
     // Initialize robot subsytems
-    drivetrain = TwilightHorse.getInstance();
+    drivetrain = DriveTrain.getInstance();
 
     shooter = new Shooter();
     intake = new Intake();
