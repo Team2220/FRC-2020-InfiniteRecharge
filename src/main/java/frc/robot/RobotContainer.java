@@ -17,6 +17,7 @@ import frc.robot.commands.intake.RunIntake;
 import frc.robot.commands.shooter.RunShooter;
 import frc.robot.commands.shooter.RunTower;
 import frc.robot.commands.shooter.ShootAndDynamicFeed;
+import frc.robot.shuffleboard.DebugTab;
 
 /**
  * Robot Container is a singleton class where all the subsystems are
@@ -45,7 +46,7 @@ public class RobotContainer {
   private final XboxController armManagement = new XboxController(1);
 
   // Shuffleboard TODO causes errors
-  // private final DebugTab debugTab = new DebugTab(driverController);
+  private final DebugTab debugTab = new DebugTab(driverController);
 
   // Singleton constructor
   private RobotContainer() {
@@ -60,7 +61,7 @@ public class RobotContainer {
     }
 
     // Initialize robot subsytems
-    drivetrain = DriveTrain.getInstance();
+    drivetrain = new DriveTrain();
 
     shooter = new Shooter();
     intake = new Intake();

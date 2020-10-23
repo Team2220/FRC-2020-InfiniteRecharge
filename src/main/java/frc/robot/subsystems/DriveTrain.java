@@ -43,10 +43,7 @@ public class DriveTrain extends SubsystemBase {
     // Drivetrain odometry
     private final DifferentialDriveOdometry odometry;
 
-    // Singleton subsystem instance
-    private static DriveTrain instance;
-
-    private DriveTrain() {
+    public DriveTrain() {
         // Map drive motor controllers to their CAN ids
         leftLeader = neoBuilder(DrivetrainConstants.LEFT_LEADER);
         leftFollower = neoBuilder(DrivetrainConstants.LEFT_FOLLOWER);
@@ -124,18 +121,6 @@ public class DriveTrain extends SubsystemBase {
     }
 
     /**
-     * Singleton instance getter method.
-     * 
-     * @return Returns the singleton object for the drivetrain.
-     */
-    public static DriveTrain getInstance() {
-        if (instance == null) {
-            instance = new DriveTrain();
-        }
-        return instance;
-    }
-
-    /**
      * Uses distance sensor to find distance in inches.
      * 
      * @return The distance measured by the distance sensor. If distance not valid,
@@ -188,7 +173,7 @@ public class DriveTrain extends SubsystemBase {
      * @param spin  The rotation power input.
      */
     public void drive(final double power, final double spin) {
-        drive.curvatureDrive(power, spin, true);
+        drive.curvatureDrive(power*0.5, spin*0.5, true);
     }
 
     /**

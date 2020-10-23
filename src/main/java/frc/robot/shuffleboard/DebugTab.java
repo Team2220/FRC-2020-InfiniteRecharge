@@ -9,10 +9,11 @@ public class DebugTab {
 
     private ShuffleboardTab tab = Shuffleboard.getTab("Debug");
 
-    public DebugTab(XboxController driverController){
+    public DebugTab(XboxController driverController) {
 
         tab.addNumber("L Joystick Value", () -> driverController.getY(Hand.kLeft)).withPosition(3, 1);
         tab.addNumber("R Joystick Value", () -> driverController.getX(Hand.kRight)).withPosition(3, 2);
-    }
+        // tab.add("ElevatorMove: up", new ElevatorMove(2.7));
 
+    }
 }
