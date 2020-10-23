@@ -173,7 +173,7 @@ public class DriveTrain extends SubsystemBase {
      * @param spin  The rotation power input.
      */
     public void drive(final double power, final double spin) {
-        drive.curvatureDrive(power*0.5, spin*0.5, true);
+        drive.curvatureDrive(power*0.25, spin*0.25, true);
     }
 
     /**
