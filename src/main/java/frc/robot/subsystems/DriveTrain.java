@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DrivetrainConstants;
 import frc.robot.commands.drivetrain.XboxDrive;
+import frc.robot.shuffleboard.DemoTab;
 
 /**
  * Twilight Horse. The cool way to say drivetrain. Also operated as a singleton
@@ -42,8 +43,12 @@ public class DriveTrain extends SubsystemBase {
 
     // Drivetrain odometry
     private final DifferentialDriveOdometry odometry;
+    
+    //Demo Stuff
+    private final DemoTab demoTab;
 
-    public DriveTrain() {
+
+    public DriveTrain(DemoTab demoTab) {
         // Map drive motor controllers to their CAN ids
         leftLeader = neoBuilder(DrivetrainConstants.LEFT_LEADER);
         leftFollower = neoBuilder(DrivetrainConstants.LEFT_FOLLOWER);
@@ -101,6 +106,8 @@ public class DriveTrain extends SubsystemBase {
 
         // Initialize drivetrain contractor
         drive = new DifferentialDrive(leftLeader, rightLeader);
+
+        this.demoTab = demoTab;
 
         // Set default command to XboxDrive
         setDefaultCommand(new XboxDrive(this));
@@ -173,7 +180,9 @@ public class DriveTrain extends SubsystemBase {
      * @param spin  The rotation power input.
      */
     public void drive(final double power, final double spin) {
-        drive.curvatureDrive(power*0.25, spin*0.25, true);
+        double modifier = demoTab.getSpeedModifier();
+
+        drive.curvatureDrive(power*modifier, spin*modifier, true);
     }
 
     /**
