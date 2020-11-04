@@ -17,8 +17,6 @@ public class Tower extends SubsystemBase {
 
     private TowerState state = TowerState.IDLE;
 
-    private static Tower instance;
-
     public Tower() {
         // Tower talons
         frontTower = new TalonSRX(TowerConstants.FRONT_TOWER);
@@ -34,7 +32,7 @@ public class Tower extends SubsystemBase {
 
         // Back tower follows front tower
         backTower.follow(frontTower);
-        
+
         // Set tower idle behavior
         frontTower.setNeutralMode(TowerConstants.TOWER_IDLE_BEHAVIOR);
         backTower.setNeutralMode(TowerConstants.TOWER_IDLE_BEHAVIOR);
@@ -46,13 +44,6 @@ public class Tower extends SubsystemBase {
         // Set voltage saturation for all shooter motor controllers
         frontTower.configVoltageCompSaturation(ShooterConstants.VOLTAGE_SATURATION);
         backTower.configVoltageCompSaturation(ShooterConstants.VOLTAGE_SATURATION);
-    }
-
-    public static Tower getInstance() {
-        if (instance == null) {
-            instance = new Tower();
-        }
-        return instance;
     }
 
     public void setState(TowerState newState) {
