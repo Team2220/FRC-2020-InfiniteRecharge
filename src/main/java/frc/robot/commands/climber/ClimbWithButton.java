@@ -13,14 +13,20 @@ public class ClimbWithButton extends CommandBase {
         RETRACTED, EXTENDED
     }
 
+    public enum Side {
+        LEFT, RIGHT
+    }
+
     private final Position position;
     private final Climber climber;
+    private final Side side;
 
-    public ClimbWithButton(Position position, Climber climber) {
+    public ClimbWithButton(Position position, Side side, Climber climber) {
 
         this.climber = climber;
         this.position = position;
-        addRequirements(climber);
+        this.side = side;
+        //addRequirements(climber);
 
     }
 
@@ -29,10 +35,28 @@ public class ClimbWithButton extends CommandBase {
 
         switch (position) {
         case EXTENDED:
-            climber.set(0.5);
+            switch (side) {
+
+            case LEFT:
+                climber.setLeft(0.5);
+                break;
+
+            case RIGHT:
+                climber.setRight(0.5);
+                break;
+            }
             break;
         case RETRACTED:
-            climber.set(-0.5);
+            switch (side) {
+
+            case LEFT:
+                climber.setLeft(-0.5);
+                break;
+
+            case RIGHT:
+                climber.setRight(-0.5);
+                break;
+            }
             break;
 
         }
@@ -42,7 +66,16 @@ public class ClimbWithButton extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         super.end(interrupted);
-        climber.set(0);
+        switch (side) {
+
+        case LEFT:
+            climber.setLeft(0);
+            break;
+
+        case RIGHT:
+            climber.setRight(0);
+            break;
+        }
     }
 
 }

@@ -11,6 +11,7 @@ import frc.robot.util.xbox.XboxController;
 import frc.robot.util.xbox.XboxController.Button;
 import frc.robot.util.xbox.XboxController.Dpad;
 import frc.robot.commands.climber.ClimbWithButton;
+import frc.robot.commands.climber.ClimbWithButton.Side;
 import frc.robot.commands.hopper.RunHopper;
 import com.revrobotics.CANSparkMax.IdleMode;
 import frc.robot.commands.intake.IntakeSetPosition;
@@ -54,16 +55,7 @@ public class RobotContainer {
 
   // Singleton constructor
   private RobotContainer() {
-    /**
-     * Checks that this class is not initialized until the robot is on, or else
-     * subsystems and commands cannot be properly initialized. The following if
-     * throws a runtime exception if the instance exists before the robot is turned
-     * on.
-     */
-    if (!Robot.isReal()) {
-      throw new RuntimeException("Error: Attempting to initialize robot code before the robot is on");
-    }
-
+    
     // Initialize robot subsytems
     drivetrain = new DriveTrain(demoTab);
 
@@ -123,9 +115,10 @@ public class RobotContainer {
     manipulatorController.getButton(Button.RIGHT_BUMPER).whenPressed(new IntakeSetPosition(Position.EXTENDED, intake));
     manipulatorController.getButton(Button.LEFT_BUMPER).whenPressed(new IntakeSetPosition(Position.RETRACTED, intake));
     manipulatorController.getButton(Button.X).whileHeld(new RunShooter(0.5, shooter));
-    driverController.getButton(Button.X).whileHeld(new ClimbWithButton(ClimbWithButton.Position.EXTENDED, climber));
-    driverController.getButton(Button.Y).whileHeld(new ClimbWithButton(ClimbWithButton.Position.RETRACTED, climber));
-
+    driverController.getButton(Button.X).whileHeld(new ClimbWithButton(ClimbWithButton.Position.EXTENDED,Side.LEFT, climber));
+    driverController.getButton(Button.Y).whileHeld(new ClimbWithButton(ClimbWithButton.Position.RETRACTED,Side.LEFT, climber));
+    driverController.getButton(Button.A).whileHeld(new ClimbWithButton(ClimbWithButton.Position.EXTENDED,Side.RIGHT, climber));
+    driverController.getButton(Button.B).whileHeld(new ClimbWithButton(ClimbWithButton.Position.RETRACTED,Side.RIGHT, climber));
   }
 
   /**
