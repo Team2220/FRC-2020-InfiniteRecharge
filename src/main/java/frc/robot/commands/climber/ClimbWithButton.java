@@ -14,7 +14,7 @@ public class ClimbWithButton extends CommandBase {
     }
 
     public enum Side {
-        LEFT, RIGHT
+        LEFT, RIGHT, BOTH
     }
 
     private final Position position;
@@ -26,7 +26,7 @@ public class ClimbWithButton extends CommandBase {
         this.climber = climber;
         this.position = position;
         this.side = side;
-        //addRequirements(climber);
+        // addRequirements(climber);
 
     }
 
@@ -44,6 +44,10 @@ public class ClimbWithButton extends CommandBase {
             case RIGHT:
                 climber.setRight(0.5);
                 break;
+            case BOTH:
+                climber.setLeft(0.5);
+                climber.setRight(0.5);
+                break;
             }
             break;
         case RETRACTED:
@@ -55,6 +59,10 @@ public class ClimbWithButton extends CommandBase {
 
             case RIGHT:
                 climber.setRight(-0.5);
+                break;
+            case BOTH:
+                climber.setLeft(0.5);
+                climber.setRight(0.5);
                 break;
             }
             break;
@@ -73,6 +81,11 @@ public class ClimbWithButton extends CommandBase {
             break;
 
         case RIGHT:
+            climber.setRight(0);
+            break;
+
+        case BOTH:
+            climber.setLeft(0);
             climber.setRight(0);
             break;
         }

@@ -25,4 +25,6 @@ public class Climber extends SubsystemBase {
     public void setRight(double speed) {
         rightTalon.set(ControlMode.PercentOutput, speed);
     }
+
+
 }
