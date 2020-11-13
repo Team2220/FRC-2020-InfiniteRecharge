@@ -29,9 +29,6 @@ public class Shooter extends SubsystemBase {
     // Constant for acceptable difference in actual and target velocity
     private static final int ACCEPTABLE_VELOCITY_DIFFERENCE = 20;
 
-    // Singleton subsystem instance
-    private static Shooter instance;
-
     ShuffleboardTab t = Shuffleboard.getTab("shooter");
     Object o = t.addNumber("velocity", () -> (getFlywheelVelocity()));
     Object d = t.addBoolean("dude", () -> flywheelAtTargetVelocity());
@@ -40,7 +37,7 @@ public class Shooter extends SubsystemBase {
      * Private Shooter subsystem. Handles initilization and configuration of all
      * related motors.
      */
-        // Shooter falcons
+    // Shooter falcons
     public Shooter() {
         leftFalcon = new TalonFX(ShooterConstants.LEFT_FALCON);
         rightFalcon = new TalonFX(ShooterConstants.RIGHT_FALCON);
@@ -79,7 +76,7 @@ public class Shooter extends SubsystemBase {
         leftFalcon.config_kP(0, 0.1);
         leftFalcon.config_kI(0, 0);
         leftFalcon.config_kD(0, 2.5);
-        leftFalcon.config_kF(0, 0.0703); //0.0692
+        leftFalcon.config_kF(0, 0.0703); // 0.0692
         // double kP = ShooterConstants.kP;
         // double kI = ShooterConstants.kI;
         // double kD = ShooterConstants.kD;
@@ -108,23 +105,11 @@ public class Shooter extends SubsystemBase {
         }
     }
 
-    /**
-     * Singleton instance getter method.
-     * 
-     * @return Returns the singleton object for the shooter.
-     */
-    public static Shooter getInstance() {
-        if (instance == null) {
-            instance = new Shooter();
-        }
-        return instance;
-    }
-
     private void transitionSystemState(ShooterSystemState newState) {
         if (sState == newState) {
             return;
         }
-        Logger.log("Shooter.transitionSystemState("+ newState +")");
+        Logger.log("Shooter.transitionSystemState(" + newState + ")");
 
         switch (newState) {
         case STILL:
@@ -147,11 +132,12 @@ public class Shooter extends SubsystemBase {
         }
         leftFalcon.set(TalonFXControlMode.PercentOutput, demand);
     }
+
     public void setState(ShooterDesiredState newState) {
         if (dState == newState) {
             return;
         }
-        Logger.log("Shooter.setState("+ newState +")");
+        Logger.log("Shooter.setState(" + newState + ")");
 
         switch (newState) {
         case IDLE:

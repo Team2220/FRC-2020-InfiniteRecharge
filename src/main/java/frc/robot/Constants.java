@@ -18,11 +18,13 @@ import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 
 public final class Constants {
 
-    public final class ClimberConstants {
+    public static final class ClimberConstants {
 
         // Climber motor controller IDs
         public static final int RIGHT_FALCON = 10;
         public static final int LEFT_FALCON = 9;
+        // Climber save
+        public static final NeutralMode IDLE_BEHAVIOR = NeutralMode.Brake;
     }
 
     /**

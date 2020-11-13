@@ -10,6 +10,8 @@ import frc.robot.subsystems.Intake.Position;
 import frc.robot.util.xbox.XboxController;
 import frc.robot.util.xbox.XboxController.Button;
 import frc.robot.util.xbox.XboxController.Dpad;
+import frc.robot.commands.climber.ClimbWithButton;
+import frc.robot.commands.climber.ClimbWithButton.Side;
 import frc.robot.commands.hopper.RunHopper;
 import com.revrobotics.CANSparkMax.IdleMode;
 import frc.robot.commands.intake.IntakeSetPosition;
@@ -17,6 +19,8 @@ import frc.robot.commands.intake.RunIntake;
 import frc.robot.commands.shooter.RunShooter;
 import frc.robot.commands.shooter.RunTower;
 import frc.robot.commands.shooter.ShootAndDynamicFeed;
+import frc.robot.shuffleboard.DebugTab;
+import frc.robot.shuffleboard.DemoTab;
 
 /**
  * Robot Container is a singleton class where all the subsystems are
@@ -42,25 +46,18 @@ public class RobotContainer {
 
   // Driver controllers
   private final XboxController driverController = new XboxController(0);
-  private final XboxController armManagement = new XboxController(1);
+  private final XboxController manipulatorController = new XboxController(1);
 
   // Shuffleboard TODO causes errors
-  // private final DebugTab debugTab = new DebugTab(driverController);
+  private final DebugTab debugTab = new DebugTab(driverController);
+  private final DemoTab demoTab = new DemoTab();
+
 
   // Singleton constructor
   private RobotContainer() {
-    /**
-     * Checks that this class is not initialized until the robot is on, or else
-     * subsystems and commands cannot be properly initialized. The following if
-     * throws a runtime exception if the instance exists before the robot is turned
-     * on.
-     */
-    if (!Robot.isReal()) {
-      throw new RuntimeException("Error: Attempting to initialize robot code before the robot is on");
-    }
-
+    
     // Initialize robot subsytems
-    drivetrain = DriveTrain.getInstance();
+    drivetrain = new DriveTrain(demoTab);
 
     shooter = new Shooter();
     intake = new Intake();
@@ -99,7 +96,7 @@ public class RobotContainer {
    * @return The manipulator controller.
    */
   public static XboxController getManipulatorController() {
-    return getInstance().armManagement;
+    return getInstance().manipulatorController;
   }
 
   /**
@@ -108,16 +105,20 @@ public class RobotContainer {
    */
   private void setBinds() {
     // No official binds have been set yet. Keep them out of master.
-    armManagement.getButton(Button.A).whileHeld(new RunHopper(hopper));
-     armManagement.getButton(Button.A).whileHeld(new RunIntake(intake));
-    armManagement.getButton(Button.Y).whileHeld(new ShootAndDynamicFeed(shooter, tower));
-    armManagement.getDpad(Dpad.UP).whileHeld(new RunTower(Constants.TowerConstants.TOWER_POWER, tower));
-    armManagement.getDpad(Dpad.DOWN).whileHeld(new RunTower(-Constants.TowerConstants.TOWER_POWER, tower));
+    manipulatorController.getButton(Button.A).whileHeld(new RunHopper(hopper));
+    manipulatorController.getButton(Button.A).whileHeld(new RunIntake(intake));
+    manipulatorController.getButton(Button.Y).whileHeld(new ShootAndDynamicFeed(shooter, tower));
+    manipulatorController.getDpad(Dpad.UP).whileHeld(new RunTower(Constants.TowerConstants.TOWER_POWER, tower));
+    manipulatorController.getDpad(Dpad.DOWN).whileHeld(new RunTower(-Constants.TowerConstants.TOWER_POWER, tower));
     // armManagement.getButton(Button.X).whileHeld(new ShootWithVelocity(ShooterConstants.SHOT_VELOCITY, shooter));
     // armManagement.getButton(Button.B).whenPressed(new ShootInventory(ShooterConstants.SHOT_VELOCITY, 3, shooter, hopper, tower));
-    armManagement.getButton(Button.RIGHT_BUMPER).whenPressed(new IntakeSetPosition(Position.EXTENDED, intake));
-    armManagement.getButton(Button.LEFT_BUMPER).whenPressed(new IntakeSetPosition(Position.RETRACTED, intake));
-    armManagement.getButton(Button.X).whileHeld(new RunShooter(0.5, shooter));
+    manipulatorController.getButton(Button.RIGHT_BUMPER).whenPressed(new IntakeSetPosition(Position.EXTENDED, intake));
+    manipulatorController.getButton(Button.LEFT_BUMPER).whenPressed(new IntakeSetPosition(Position.RETRACTED, intake));
+    manipulatorController.getButton(Button.X).whileHeld(new RunShooter(0.5, shooter));
+    driverController.getButton(Button.X).whileHeld(new ClimbWithButton(ClimbWithButton.Position.EXTENDED,Side.LEFT, climber));
+    driverController.getButton(Button.Y).whileHeld(new ClimbWithButton(ClimbWithButton.Position.RETRACTED,Side.LEFT, climber));
+    driverController.getButton(Button.A).whileHeld(new ClimbWithButton(ClimbWithButton.Position.EXTENDED,Side.RIGHT, climber));
+    driverController.getButton(Button.B).whileHeld(new ClimbWithButton(ClimbWithButton.Position.RETRACTED,Side.RIGHT, climber));
   }
 
   /**
