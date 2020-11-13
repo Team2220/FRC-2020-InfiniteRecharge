@@ -21,6 +21,7 @@ import frc.robot.commands.shooter.RunTower;
 import frc.robot.commands.shooter.ShootAndDynamicFeed;
 import frc.robot.shuffleboard.DebugTab;
 import frc.robot.shuffleboard.DemoTab;
+import frc.robot.shuffleboard.DriverTab;
 
 /**
  * Robot Container is a singleton class where all the subsystems are
@@ -51,6 +52,7 @@ public class RobotContainer {
   // Shuffleboard TODO causes errors
   private final DebugTab debugTab = new DebugTab(driverController);
   private final DemoTab demoTab = new DemoTab();
+  private final DriverTab driverTab = new DriverTab();
 
 
   // Singleton constructor
