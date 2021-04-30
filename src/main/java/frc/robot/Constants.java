@@ -144,7 +144,7 @@ public final class Constants {
         public static final int BACK_TOWER = 6;
 
         // Tower motor inversions
-        public static final boolean FRONT_TOWER_INVERT = false;
+        public static final boolean FRONT_TOWER_INVERT = true;
         public static final boolean BACK_TOWER_INVERT = false;
 
         // Tower idle behavior

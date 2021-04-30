@@ -10,6 +10,7 @@ import frc.robot.subsystems.Intake.Position;
 import frc.robot.util.xbox.XboxController;
 import frc.robot.util.xbox.XboxController.Button;
 import frc.robot.util.xbox.XboxController.Dpad;
+import frc.robot.Constants.ShooterConstants;
 import frc.robot.commands.climber.ClimbWithButton;
 import frc.robot.commands.climber.ClimbWithButton.Side;
 import frc.robot.commands.hopper.RunHopper;
@@ -19,6 +20,7 @@ import frc.robot.commands.intake.RunIntake;
 import frc.robot.commands.shooter.RunShooter;
 import frc.robot.commands.shooter.RunTower;
 import frc.robot.commands.shooter.ShootAndDynamicFeed;
+import frc.robot.commands.shooter.ShootWithVelocity;
 import frc.robot.shuffleboard.DebugTab;
 import frc.robot.shuffleboard.DemoTab;
 import frc.robot.shuffleboard.DriverTab;
@@ -60,6 +62,7 @@ public class RobotContainer {
     
     // Initialize robot subsytems
     drivetrain = new DriveTrain(demoTab);
+    demoTab.setDifferentialDrive(drivetrain.getDifferentialDrive());
 
     shooter = new Shooter();
     intake = new Intake();
@@ -110,13 +113,13 @@ public class RobotContainer {
     manipulatorController.getButton(Button.A).whileHeld(new RunHopper(hopper));
     manipulatorController.getButton(Button.A).whileHeld(new RunIntake(intake));
     manipulatorController.getButton(Button.Y).whileHeld(new ShootAndDynamicFeed(shooter, tower));
-    manipulatorController.getDpad(Dpad.UP).whileHeld(new RunTower(Constants.TowerConstants.TOWER_POWER, tower));
-    manipulatorController.getDpad(Dpad.DOWN).whileHeld(new RunTower(-Constants.TowerConstants.TOWER_POWER, tower));
-    // armManagement.getButton(Button.X).whileHeld(new ShootWithVelocity(ShooterConstants.SHOT_VELOCITY, shooter));
+    manipulatorController.getDpad(Dpad.UP).whileHeld(new RunTower(-Constants.TowerConstants.TOWER_POWER, tower));
+    manipulatorController.getDpad(Dpad.DOWN).whileHeld(new RunTower(Constants.TowerConstants.TOWER_POWER, tower));
+    manipulatorController.getButton(Button.B).whileHeld(new ShootWithVelocity(ShooterConstants.SHOT_VELOCITY, shooter));
     // armManagement.getButton(Button.B).whenPressed(new ShootInventory(ShooterConstants.SHOT_VELOCITY, 3, shooter, hopper, tower));
     manipulatorController.getButton(Button.RIGHT_BUMPER).whenPressed(new IntakeSetPosition(Position.EXTENDED, intake));
     manipulatorController.getButton(Button.LEFT_BUMPER).whenPressed(new IntakeSetPosition(Position.RETRACTED, intake));
-    manipulatorController.getButton(Button.X).whileHeld(new RunShooter(0.5, shooter));
+    manipulatorController.getButton(Button.X).whileHeld(new RunShooter(1, shooter));
     driverController.getButton(Button.X).whileHeld(new ClimbWithButton(ClimbWithButton.Position.EXTENDED,Side.LEFT, climber));
     driverController.getButton(Button.Y).whileHeld(new ClimbWithButton(ClimbWithButton.Position.RETRACTED,Side.LEFT, climber));
     driverController.getButton(Button.A).whileHeld(new ClimbWithButton(ClimbWithButton.Position.EXTENDED,Side.RIGHT, climber));
