@@ -107,6 +107,10 @@ public final class Constants {
      */
     public static final class ShooterConstants {
 
+        // Shooter forward and reverse constants
+        public static final int SOLENOID_FORWARD = 4;
+        public static final int SOLENOID_REVERSE = 5;
+        
         // Shooter flywheel motor controller IDs
         public static final int LEFT_FALCON = 7;
         public static final int RIGHT_FALCON = 8;

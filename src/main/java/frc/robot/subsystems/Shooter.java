@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.util.Logger;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 /**
  * Shooter
@@ -16,7 +18,23 @@ import frc.robot.util.Logger;
 public class Shooter extends SubsystemBase {
 
     private TalonFX leftFalcon, rightFalcon;
+    private DoubleSolenoid solenoid = new DoubleSolenoid(ShooterConstants.SOLENOID_FORWARD,
+      ShooterConstants.SOLENOID_REVERSE);
 
+    public enum HoodPosition{
+        EXTENDED, RETRACTED;
+    }
+
+    public void setHoodPosition(HoodPosition deploy) {
+        switch (deploy) {
+        case EXTENDED:
+          solenoid.set(Value.kForward);
+          break;
+        case RETRACTED:
+          solenoid.set(Value.kReverse);
+          break;
+        }
+    }
     // Flywheel target velocity instance variable
     private double flywheelTargetVelocity = 0;
 
