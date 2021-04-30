@@ -40,10 +40,9 @@ public class ShootAndDynamicFeed extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        Logger.log("ShootAndDynamicFeed.end("+ interrupted +")");
+        Logger.log("ShootAndDynamicFeed.end(" + interrupted + ")");
         shooter.setState(ShooterDesiredState.IDLE);
         tower.setState(TowerState.IDLE);
-        
 
     }
 }

@@ -27,7 +27,7 @@ public class Shooter extends SubsystemBase {
     private ShooterDesiredState dState = ShooterDesiredState.IDLE;
 
     // Constant for acceptable difference in actual and target velocity
-    private static final int ACCEPTABLE_VELOCITY_DIFFERENCE = 20;
+    private static final int ACCEPTABLE_VELOCITY_DIFFERENCE = 1296;
 
     ShuffleboardTab t = Shuffleboard.getTab("shooter");
     Object o = t.addNumber("velocity", () -> (getFlywheelVelocity()));
@@ -188,9 +188,11 @@ public class Shooter extends SubsystemBase {
     }
 
     public boolean flywheelAtTargetVelocity() {
-        double difference = getFlywheelVelocity() - flywheelTargetVelocity;
+        double difference = Math.abs(getFlywheelVelocity() - flywheelTargetVelocity);
         return difference >= 0 && difference < ACCEPTABLE_VELOCITY_DIFFERENCE;
     }
+    //change acceptable velocity-maybe too little-if code not working
+
 
     public enum ShooterSystemState {
         STILL, SPINNING_UNREADY, SPINNING_READY

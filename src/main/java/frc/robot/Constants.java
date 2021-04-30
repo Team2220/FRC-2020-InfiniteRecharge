@@ -95,7 +95,7 @@ public final class Constants {
         // Intake deploy solenoid IDs
         public static final int SOLENOID_FORWARD = 6;
         public static final int SOLENOID_REVERSE = 7;
-        public static final double INTAKE_POWER = 0.7; 
+        public static final double INTAKE_POWER = 0.4; 
     }
    
     
