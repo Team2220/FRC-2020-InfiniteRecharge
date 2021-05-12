@@ -21,6 +21,7 @@ import frc.robot.commands.intake.RunIntake;
 import frc.robot.commands.shooter.RunShooter;
 import frc.robot.commands.shooter.RunTower;
 import frc.robot.commands.shooter.ShootAndDynamicFeed;
+import frc.robot.commands.shooter.ShootWithShuffleboard;
 import frc.robot.commands.shooter.ShootWithVelocity;
 import frc.robot.commands.shooter.ShooterSetPosition;
 import frc.robot.shuffleboard.DebugTab;
@@ -121,7 +122,7 @@ public class RobotContainer {
     // armManagement.getButton(Button.B).whenPressed(new ShootInventory(ShooterConstants.SHOT_VELOCITY, 3, shooter, hopper, tower));
     manipulatorController.getButton(Button.RIGHT_BUMPER).whenPressed(new IntakeSetPosition(Position.EXTENDED, intake));
     manipulatorController.getButton(Button.LEFT_BUMPER).whenPressed(new IntakeSetPosition(Position.RETRACTED, intake));
-    manipulatorController.getButton(Button.X).whileHeld(new RunShooter(1, shooter));
+    manipulatorController.getButton(Button.X).whileHeld(new ShootWithShuffleboard(demoTab, shooter));
     driverController.getButton(Button.X).whileHeld(new ClimbWithButton(ClimbWithButton.Position.EXTENDED,Side.LEFT, climber));
     driverController.getButton(Button.Y).whileHeld(new ClimbWithButton(ClimbWithButton.Position.RETRACTED,Side.LEFT, climber));
     driverController.getButton(Button.A).whileHeld(new ClimbWithButton(ClimbWithButton.Position.EXTENDED,Side.RIGHT, climber));
