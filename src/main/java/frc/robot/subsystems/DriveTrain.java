@@ -221,4 +221,8 @@ public class DriveTrain extends SubsystemBase {
     private CANSparkMax neoBuilder(final int channel) {
         return new CANSparkMax(channel, MotorType.kBrushless);
     }
+
+    public DifferentialDrive getDifferentialDrive() {
+        return drive;
+    }
 }
