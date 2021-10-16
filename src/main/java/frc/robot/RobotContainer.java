@@ -8,6 +8,7 @@ import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake.Position;
 import frc.robot.subsystems.Shooter.HoodPosition;
+import frc.robot.util.PhotoelectricSensor;
 import frc.robot.util.xbox.XboxController;
 import frc.robot.util.xbox.XboxController.Button;
 import frc.robot.util.xbox.XboxController.Dpad;

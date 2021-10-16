@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 /**
  * Shooter
  */
-
 public class Shooter extends SubsystemBase {
 
     private TalonFX leftFalcon, rightFalcon;
